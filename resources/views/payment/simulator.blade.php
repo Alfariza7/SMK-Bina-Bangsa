@@ -20,6 +20,20 @@
                 <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-2xl leading-relaxed">
                     Sistem otomatisasi verifikasi pembayaran SPP via Virtual Account. Sesuai ketentuan sertifikasi LSP, pelunasan tagihan <strong>hanya terjadi</strong> saat menerima sinyal Callback Webhook yang valid dari Payment Gateway.
                 </p>
+
+                <!-- Tombol Reset Demo LSP -->
+                <div class="mt-4 flex flex-wrap items-center gap-2">
+                    <button type="button" 
+                            @click="resetAhmadFauzanDemo()" 
+                            :disabled="loadingReset"
+                            class="inline-flex items-center gap-2 px-3.5 py-2 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 hover:text-white rounded-xl text-xs font-bold transition cursor-pointer">
+                        <i class="fa-solid fa-rotate-left" :class="loadingReset ? 'animate-spin' : ''"></i>
+                        <span>Reset Tagihan Demo (Ahmad Fauzan)</span>
+                    </button>
+                    <span class="text-[11px] text-slate-400">
+                        *Kembalikan tagihan Sept 2026 Ahmad Fauzan ke status BELUM BAYAR (Rp 350.000)
+                    </span>
+                </div>
             </div>
 
             <!-- Quick Rule Highlights -->
@@ -73,7 +87,7 @@
     <div x-show="activeTab === 'banking'" x-transition class="space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <!-- Left Panel: Input & Inquiry Form -->
-            <div class="lg:col-span-5 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between space-y-6">
+            <div class="lg:col-span-5 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between space-y-5">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                         <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
@@ -113,12 +127,12 @@
                             <input type="text" 
                                    x-model="vaNumber" 
                                    placeholder="Contoh: 8800012345" 
-                                   class="w-full font-mono text-sm tracking-wider font-bold rounded-xl border border-slate-200 pl-3.5 pr-24 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
+                                   class="w-full font-mono text-sm tracking-wider font-bold rounded-xl border border-slate-200 pl-3.5 pr-28 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                             <button type="button" 
                                     @click="runInquiry()" 
                                     :disabled="loadingInquiry"
-                                    class="absolute right-1.5 top-1.5 bottom-1.5 px-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white font-bold text-xs rounded-lg transition duration-150 cursor-pointer flex items-center gap-1.5">
-                                <span x-show="!loadingInquiry"><i class="fa-solid fa-magnifying-glass"></i> Cek</span>
+                                    class="absolute right-1.5 top-1.5 bottom-1.5 px-3.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white font-bold text-xs rounded-lg transition duration-150 cursor-pointer flex items-center gap-1.5">
+                                <span x-show="!loadingInquiry" class="flex items-center gap-1.5"><i class="fa-solid fa-magnifying-glass"></i> Cek</span>
                                 <span x-show="loadingInquiry"><i class="fa-solid fa-spinner animate-spin"></i></span>
                             </button>
                         </div>
@@ -142,7 +156,7 @@
                             <label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50 transition"
                                    :class="paymentChannel === 'MANDIRI_VA' ? 'border-indigo-600 bg-indigo-50/50 text-indigo-900 font-bold' : 'border-slate-200 text-slate-700'">
                                 <input type="radio" name="channel" value="MANDIRI_VA" x-model="paymentChannel" class="text-indigo-600">
-                                <span>Mandiri VA</span>
+                                <span>Mandiri Virtual Account</span>
                             </label>
 
                             <label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50 transition"
@@ -156,6 +170,36 @@
                                 <input type="radio" name="channel" value="BRI_VA" x-model="paymentChannel" class="text-indigo-600">
                                 <span>BRI Virtual Account</span>
                             </label>
+                        </div>
+                    </div>
+
+                    <!-- Simulasi Tanggal Transaksi (paid_at) Sesuai Skenario LSP -->
+                    <div class="pt-2">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label class="block text-xs font-bold text-slate-700">
+                                Simulasi Waktu Transaksi (paid_at):
+                            </label>
+                            <span class="text-[10px] text-indigo-600 font-semibold bg-indigo-50 px-2 py-0.5 rounded-md">Uji 4 Skenario LSP</span>
+                        </div>
+                        <input type="datetime-local" 
+                               x-model="simulatedPaidAt" 
+                               class="w-full text-xs font-mono rounded-xl border border-slate-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <button type="button" @click="setPaidAtDate('2026-09-25T10:00')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-[10px] font-medium transition cursor-pointer">
+                                25 Sept (Sebelum JT)
+                            </button>
+                            <button type="button" @click="setPaidAtDate('2026-09-30T15:30')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-[10px] font-medium transition cursor-pointer">
+                                30 Sept (Tepat JT)
+                            </button>
+                            <button type="button" @click="setPaidAtDate('2026-10-01T08:00')" class="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-[10px] font-medium transition cursor-pointer">
+                                01 Okt (Tunggakan)
+                            </button>
+                            <button type="button" @click="setPaidAtDate('2026-10-05T09:15')" class="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-[10px] font-medium transition cursor-pointer">
+                                05 Okt (Lunas Tunggakan)
+                            </button>
+                            <button type="button" @click="setPaidAtNow()" class="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg text-[10px] font-bold transition cursor-pointer">
+                                Sekarang
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -186,10 +230,15 @@
                                   x-text="inquiryResult.tagihan.status">
                             </span>
                         </template>
+                        <template x-if="inquiryResult && !inquiryResult.tagihan">
+                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700">
+                                LUNAS
+                            </span>
+                        </template>
                     </div>
 
-                    <!-- Placeholder Before Inquiry -->
-                    <div x-show="!inquiryResult" class="py-14 text-center space-y-3">
+                    <!-- Placeholder Before Inquiry (Hanya Tampil Jika Belum Cek / inquiryResult null) -->
+                    <div x-show="!inquiryResult && !errorMessage" class="py-14 text-center space-y-3">
                         <div class="w-14 h-14 mx-auto rounded-2xl bg-indigo-50 text-indigo-500 flex items-center justify-center text-xl">
                             <i class="fa-solid fa-receipt"></i>
                         </div>
@@ -199,7 +248,7 @@
                         </p>
                     </div>
 
-                    <!-- Invoice Details After Inquiry -->
+                    <!-- Invoice Details After Inquiry (Tampil setelah Cek berhasil) -->
                     <div x-show="inquiryResult" class="mt-5 space-y-4" style="display: none;">
                         <!-- Student Profile Snapshot -->
                         <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
@@ -217,7 +266,7 @@
                             </div>
                         </div>
 
-                        <!-- Active Billing Info -->
+                        <!-- Active Billing Info (Jika ada tagihan belum lunas) -->
                         <template x-if="inquiryResult && inquiryResult.tagihan">
                             <div class="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100 space-y-3">
                                 <div class="flex items-center justify-between">
@@ -240,14 +289,16 @@
                             </div>
                         </template>
 
-                        <!-- If No Active Bill -->
+                        <!-- If All Bills Paid (Seluruh Tagihan Sudah Lunas Rp 0) -->
                         <template x-if="inquiryResult && !inquiryResult.tagihan">
-                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-emerald-800 text-xs flex items-center gap-3">
-                                <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
-                                <div>
-                                    <h5 class="font-bold">Semua Tagihan Sudah LUNAS</h5>
-                                    <p class="text-[11px] text-emerald-700">Siswa ini tidak memiliki tagihan aktif yang perlu dibayar.</p>
+                            <div class="p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 space-y-2">
+                                <div class="flex items-center gap-2 font-bold text-sm text-emerald-800">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+                                    <span>Seluruh Tagihan Sudah LUNAS (Rp 0)</span>
                                 </div>
+                                <p class="text-xs text-emerald-700">
+                                    Siswa atas nama <strong x-text="inquiryResult?.siswa?.nama"></strong> tidak memiliki tagihan aktif yang perlu dibayar.
+                                </p>
                             </div>
                         </template>
                     </div>
@@ -266,7 +317,7 @@
                     </div>
                 </div>
 
-                <!-- Error Message Alert -->
+                <!-- Error Message Alert (Hanya jika benar-benar error) -->
                 <div x-show="errorMessage" class="mt-4 p-4 bg-rose-50 border border-rose-200 rounded-2xl text-xs text-rose-800 flex items-start gap-2" style="display: none;">
                     <i class="fa-solid fa-triangle-exclamation text-rose-600 mt-0.5"></i>
                     <span x-text="errorMessage"></span>
@@ -450,12 +501,12 @@
             <table class="w-full text-left text-xs">
                 <thead class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200/80">
                     <tr>
-                        <th class="py-3 px-5">Transaction ID</th>
+                        <th class="py-3 px-5">ID Transaksi</th>
                         <th class="py-3 px-5">Virtual Account</th>
                         <th class="py-3 px-5">Nama Siswa / NIS</th>
                         <th class="py-3 px-5">Nominal</th>
                         <th class="py-3 px-5">Channel</th>
-                        <th class="py-3 px-5">Tanggal & Waktu</th>
+                        <th class="py-3 px-5">Waktu Transaksi</th>
                         <th class="py-3 px-5">Status</th>
                     </tr>
                 </thead>
@@ -480,7 +531,7 @@
                                           'bg-rose-100 text-rose-700': item.status_transaksi === 'FAILED',
                                           'bg-amber-100 text-amber-700': item.status_transaksi === 'EXPIRED'
                                       }"
-                                      x-text="item.status_transaksi">
+                                      x-text="item.status_transaksi === 'PAID' ? 'LUNAS' : item.status_transaksi">
                                 </span>
                             </td>
                         </tr>
@@ -502,9 +553,11 @@ function paymentSimulator() {
         activeTab: 'banking',
         vaNumber: '{{ $selectedVa ?? "8800012345" }}',
         paymentChannel: 'BCA_VA',
+        simulatedPaidAt: new Date().toISOString().slice(0, 16),
         inquiryResult: null,
         loadingInquiry: false,
         loadingPayment: false,
+        loadingReset: false,
         paymentSuccessMessage: '',
         errorMessage: '',
         lastTrxData: null,
@@ -525,6 +578,14 @@ function paymentSimulator() {
             if (this.vaNumber) {
                 this.runInquiry();
             }
+        },
+
+        setPaidAtDate(datetimeStr) {
+            this.simulatedPaidAt = datetimeStr;
+        },
+
+        setPaidAtNow() {
+            this.simulatedPaidAt = new Date().toISOString().slice(0, 16);
         },
 
         selectStudentPreset(e) {
@@ -560,6 +621,7 @@ function paymentSimulator() {
                 const data = await res.json();
                 if (res.ok && data.success) {
                     this.inquiryResult = data.data;
+                    this.errorMessage = '';
                     if (data.data.tagihan) {
                         this.updateWebhookPayload(data.data.virtual_account, data.data.tagihan.nominal);
                     }
@@ -585,13 +647,21 @@ function paymentSimulator() {
 
             const trxId = 'TRX-' + new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-' + Math.random().toString(36).substring(2, 7).toUpperCase();
             
+            // Format simulatedPaidAt ke format YYYY-MM-DD HH:mm:ss
+            let formattedPaidAt;
+            if (this.simulatedPaidAt) {
+                formattedPaidAt = this.simulatedPaidAt.replace('T', ' ') + ':00';
+            } else {
+                formattedPaidAt = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            }
+
             const payload = {
                 virtual_account: this.inquiryResult.virtual_account,
                 amount: this.inquiryResult.tagihan.nominal,
                 transaction_id: trxId,
                 status: 'PAID',
                 payment_channel: this.paymentChannel,
-                paid_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
+                paid_at: formattedPaidAt
             };
 
             try {
@@ -622,6 +692,37 @@ function paymentSimulator() {
             }
         },
 
+        async resetAhmadFauzanDemo() {
+            this.loadingReset = true;
+            this.errorMessage = '';
+            this.paymentSuccessMessage = '';
+
+            try {
+                const res = await fetch('{{ route("payment.reset_demo") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    alert('Berhasil: ' + data.message);
+                    this.vaNumber = '8800012345';
+                    this.runInquiry();
+                    this.refreshTransactions();
+                } else {
+                    alert('Gagal: ' + data.message);
+                }
+            } catch (err) {
+                alert('Terjadi kesalahan jaringan saat reset demo.');
+            } finally {
+                this.loadingReset = false;
+            }
+        },
+
         // Webhook Tester Functions
         setScenario(type) {
             const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
@@ -631,7 +732,9 @@ function paymentSimulator() {
                 virtual_account: "8800012345",
                 amount: 350000,
                 transaction_id: "TRX-" + today + "-" + randomCode,
-                status: "PAID"
+                status: "PAID",
+                payment_channel: "BCA_VA",
+                paid_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
             };
 
             if (type === 'duplicate') {

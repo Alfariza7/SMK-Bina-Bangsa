@@ -18,16 +18,34 @@ class AdminDashboardController extends Controller
         $totalTagihan = TagihanSpp::count();
         $totalPembayaran = Pembayaran::sum('nominal_pembayaran');
         $totalTunggakan = TagihanSpp::where('status', 'TUNGGAKAN')->sum('nominal');
-        $transaksiHariIni = TransaksiPaymentGateway::whereDate('created_at', Carbon::today())->count();
+        $totalSiswaMenunggak = TagihanSpp::where('status', 'TUNGGAKAN')->distinct('id_siswa')->count('id_siswa');
+        $transaksiHariIni = TransaksiPaymentGateway::whereDate('tanggal_transaksi', Carbon::today())->count();
         $transaksiTerbaru = TransaksiPaymentGateway::with('siswa')->latest()->take(5)->get();
+
+        // Data Grafik Penerimaan SPP Per Bulan (Dinamis dari database)
+        $penerimaanPerBulan = TagihanSpp::where('status', 'LUNAS')
+            ->selectRaw('bulan, tahun, sum(nominal) as total_nominal, count(distinct id_siswa) as jumlah_siswa')
+            ->groupBy('bulan', 'tahun')
+            ->orderByRaw('MIN(id_tagihan) ASC')
+            ->get();
+
+        // Data Grafik Tunggakan Per Bulan (100% sinkron dengan kartu Total Tunggakan)
+        $tunggakanPerBulan = TagihanSpp::where('status', 'TUNGGAKAN')
+            ->selectRaw('bulan, tahun, sum(nominal) as total_nominal, count(distinct id_siswa) as jumlah_siswa')
+            ->groupBy('bulan', 'tahun')
+            ->orderByRaw('MIN(id_tagihan) ASC')
+            ->get();
 
         return view('admin.dashboard', compact(
             'totalSiswa',
             'totalTagihan',
             'totalPembayaran',
             'totalTunggakan',
+            'totalSiswaMenunggak',
             'transaksiHariIni',
-            'transaksiTerbaru'
+            'transaksiTerbaru',
+            'penerimaanPerBulan',
+            'tunggakanPerBulan'
         ));
     }
 }

@@ -40,6 +40,7 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->grou
 
 // Simulasi Payment Gateway & Callback Webhook (Poin G, H, I Dokumen Soal)
 Route::get('/simulator-payment', [PaymentGatewayController::class, 'simulator'])->name('payment.simulator');
+Route::post('/simulator-payment/reset-demo', [PaymentGatewayController::class, 'resetDemo'])->name('payment.reset_demo');
 Route::get('/payment-gateway/transactions', [PaymentGatewayController::class, 'getTransactions'])->name('payment.transactions');
 Route::post('/payment-gateway/inquiry', [PaymentGatewayController::class, 'inquiry'])->name('payment.inquiry');
 Route::post('/payment-gateway/callback', [PaymentGatewayController::class, 'callback'])->name('payment.callback');

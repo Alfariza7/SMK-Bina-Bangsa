@@ -103,13 +103,16 @@ class PaymentGatewayController extends Controller
 
         if ($tagihanList->isEmpty()) {
             return response()->json([
-                'success' => false,
+                'success' => true,
                 'message' => 'Siswa atas nama ' . $va->siswa->nama . ' tidak memiliki tagihan aktif (Seluruh tagihan sudah LUNAS).',
                 'data' => [
+                    'virtual_account' => $va->nomor_va,
                     'siswa' => [
+                        'id_siswa' => $va->siswa->id_siswa,
                         'nama' => $va->siswa->nama,
                         'nis' => $va->siswa->nis,
                         'kelas' => $va->siswa->kelas->nama_kelas ?? '-',
+                        'jurusan' => $va->siswa->kelas->jurusan->nama_jurusan ?? '-',
                     ],
                     'tagihan' => null,
                 ]
@@ -140,6 +143,48 @@ class PaymentGatewayController extends Controller
                     'status' => $tagihanAktif->status,
                 ],
                 'daftar_tagihan_lain' => $tagihanList,
+            ]
+        ]);
+    }
+
+    /**
+     * Reset Tagihan Demo untuk Siswa Ahmad Fauzan (NIS: 12345)
+     */
+    public function resetDemo()
+    {
+        $siswa = Siswa::where('nis', '12345')->first();
+        if (!$siswa) {
+            return response()->json(['success' => false, 'message' => 'Siswa Ahmad Fauzan tidak ditemukan.'], 404);
+        }
+
+        // Cari atau buat tagihan September 2026
+        $tagihanSept = TagihanSpp::firstOrNew([
+            'id_siswa' => $siswa->id_siswa,
+            'bulan' => 'September',
+            'tahun' => 2026,
+        ]);
+
+        $tagihanSept->nominal = 350000;
+        $tagihanSept->tanggal_jatuh_tempo = '2026-09-30';
+        $tagihanSept->status = 'BELUM BAYAR';
+        $tagihanSept->save();
+
+        // Hapus pembayaran terkait tagihan September 2026
+        Pembayaran::where('id_tagihan', $tagihanSept->id_tagihan)->delete();
+
+        // Hapus transaksi payment gateway dummy Ahmad Fauzan agar transaction_id bisa diuji ulang
+        TransaksiPaymentGateway::where('id_siswa', $siswa->id_siswa)->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Tagihan demo Ahmad Fauzan (September 2026 - Rp 350.000) berhasil direset ke status BELUM BAYAR!',
+            'data' => [
+                'nis' => $siswa->nis,
+                'nama' => $siswa->nama,
+                'bulan' => 'September 2026',
+                'nominal' => 350000,
+                'status' => 'BELUM BAYAR',
+                'virtual_account' => '8800012345',
             ]
         ]);
     }

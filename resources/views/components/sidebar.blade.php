@@ -12,22 +12,8 @@
             </div>
         </div>
 
-        <!-- Role Indicator Pill -->
-        <div class="px-4 py-3 mx-3 my-3 bg-slate-800/50 rounded-2xl border border-slate-700/40 flex items-center justify-between">
-            <span class="text-[11px] font-medium text-slate-400">Hak Akses:</span>
-            <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider
-                {{ (Auth::user()?->role ?? '') === 'admin' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' : '' }}
-                {{ (Auth::user()?->role ?? '') === 'kepala_sekolah' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : '' }}
-                {{ (Auth::user()?->role ?? '') === 'teller' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' : '' }}
-                {{ (Auth::user()?->role ?? '') === 'siswa' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : '' }}
-                {{ !Auth::check() ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : '' }}
-            ">
-                {{ Auth::check() ? str_replace('_', ' ', Auth::user()->role) : 'PENGUJI / ASESOR' }}
-            </span>
-        </div>
-
         <!-- Nav Links according to Role (Modular Per-Role Components) -->
-        <nav class="px-3 space-y-1 text-xs font-semibold">
+        <nav class="px-3 pt-3 space-y-1 text-xs font-semibold">
             @if(Auth::check() && view()->exists('components.sidebar.' . Auth::user()->role))
                 @include('components.sidebar.' . Auth::user()->role)
             @else

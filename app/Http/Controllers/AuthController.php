@@ -30,7 +30,7 @@ class AuthController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ], [
-            'username.required' => 'NIS wajib diisi.',
+            'username.required' => 'NIS / Username wajib diisi.',
             'password.required' => 'Password wajib diisi.',
         ]);
 
@@ -38,7 +38,7 @@ class AuthController extends Controller
         $user = User::where('username', $credentials['username'])->first();
         if (!$user) {
             return back()->withInput($request->only('username'))->withErrors([
-                'username' => 'NIS tidak terdaftar di sistem.',
+                'username' => 'NIS / Username tidak terdaftar di sistem.',
             ]);
         }
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         // 6. Redirect sesuai peran / role
-        return $this->redirectByRole(Auth::user()->role)->with('success', 'Selamat datang, ' . Auth::user()->nama . '!');
+        return $this->redirectByRole(Auth::user()->role);
     }
 
     /**

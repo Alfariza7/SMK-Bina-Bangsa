@@ -5,19 +5,27 @@
 </a>
 
 <div class="pt-4 pb-1 px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">Master Data</div>
-<a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
+<a href="#" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
+    <i class="fa-solid fa-users-gear w-4 text-center"></i>
+    <span>Data Pengguna (User)</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
+    <i class="fa-solid fa-calendar-days w-4 text-center"></i>
+    <span>Tahun Ajaran</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
     <i class="fa-solid fa-user-graduate w-4 text-center"></i>
     <span>Data Siswa</span>
 </a>
-<a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
+<a href="#" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
     <i class="fa-solid fa-school w-4 text-center"></i>
     <span>Kelas & Jurusan</span>
 </a>
-<a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
+<a href="#" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
     <i class="fa-solid fa-money-bill-wave w-4 text-center"></i>
     <span>Tarif SPP</span>
 </a>
-<a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
+<a href="#" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
     <i class="fa-solid fa-credit-card w-4 text-center"></i>
     <span>Virtual Account</span>
 </a>

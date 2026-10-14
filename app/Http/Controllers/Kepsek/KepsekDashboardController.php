@@ -21,13 +21,29 @@ class KepsekDashboardController extends Controller
         $jumlahSiswaBelumBayar = TagihanSpp::where('status', 'BELUM BAYAR')->distinct('id_siswa')->count('id_siswa');
         $jumlahSiswaLunas = TagihanSpp::where('status', 'LUNAS')->distinct('id_siswa')->count('id_siswa');
 
+        // Data Tren Penerimaan SPP Per Bulan (Dinamis)
+        $trenPenerimaan = TagihanSpp::where('status', 'LUNAS')
+            ->selectRaw('bulan, tahun, sum(nominal) as total_nominal, count(distinct id_siswa) as jumlah_siswa')
+            ->groupBy('bulan', 'tahun')
+            ->orderByRaw('MIN(id_tagihan) ASC')
+            ->get();
+
+        // Data Komparasi Siswa Menunggak Per Bulan (100% Sinkron dengan kartu metrik)
+        $komparasiTunggakan = TagihanSpp::where('status', 'TUNGGAKAN')
+            ->selectRaw('bulan, tahun, sum(nominal) as total_nominal, count(distinct id_siswa) as jumlah_siswa')
+            ->groupBy('bulan', 'tahun')
+            ->orderByRaw('MIN(id_tagihan) ASC')
+            ->get();
+
         return view('kepsek.dashboard', compact(
             'siswaAktif',
             'totalPenerimaan',
             'totalTunggakan',
             'jumlahSiswaMenunggak',
             'jumlahSiswaBelumBayar',
-            'jumlahSiswaLunas'
+            'jumlahSiswaLunas',
+            'trenPenerimaan',
+            'komparasiTunggakan'
         ));
     }
 }

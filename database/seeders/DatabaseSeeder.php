@@ -151,13 +151,11 @@ class DatabaseSeeder extends Seeder
                 'tanggal_dibuat' => now(),
             ]);
 
-            // Buat contoh tagihan sesuai lembar soal:
-            // Juli 2026: LUNAS (simulasi pembayaran lalu)
-            // Agustus 2026: LUNAS
-            // September 2026: BELUM BAYAR (atau LUNAS tergantung skenario)
-            // Oktober 2026: TUNGGAKAN
+            // Buat contoh tagihan sesuai lembar soal LSP:
+            // TA 2026/2027: Juli 2026, Agustus 2026, September 2026
+            // Jatuh tempo tiap akhir bulan. Lewat tanggal 1 bulan berikutnya otomatis TUNGGAKAN.
             if ($data['nis'] === '12345') {
-                // Sesuai rancangan dashboard siswa Ahmad Fauzan di soal (Halaman P)
+                // Ahmad Fauzan (Target Demo Pengujian LSP)
                 TagihanSpp::create([
                     'id_siswa' => $siswa->id_siswa,
                     'id_tarif' => $tarif->id_tarif,
@@ -180,7 +178,7 @@ class DatabaseSeeder extends Seeder
                     'status' => 'LUNAS',
                 ]);
 
-                // Tagihan aktif untuk demonstrasi: September 2026 BELUM BAYAR
+                // Tagihan aktif untuk demonstrasi wajib LSP: September 2026 BELUM BAYAR
                 TagihanSpp::create([
                     'id_siswa' => $siswa->id_siswa,
                     'id_tarif' => $tarif->id_tarif,
@@ -191,20 +189,20 @@ class DatabaseSeeder extends Seeder
                     'tanggal_jatuh_tempo' => '2026-09-30',
                     'status' => 'BELUM BAYAR',
                 ]);
-
-                // Tagihan lampau yang telat: Oktober 2026 TUNGGAKAN
+            } elseif ($data['nis'] === '12346') {
+                // Siti Aminah: Tertib bayar (LUNAS)
                 TagihanSpp::create([
                     'id_siswa' => $siswa->id_siswa,
                     'id_tarif' => $tarif->id_tarif,
                     'id_tahun_ajaran' => $ta->id_tahun_ajaran,
-                    'bulan' => 'Oktober',
+                    'bulan' => 'September',
                     'tahun' => 2026,
                     'nominal' => 350000,
-                    'tanggal_jatuh_tempo' => '2026-10-31',
-                    'status' => 'TUNGGAKAN',
+                    'tanggal_jatuh_tempo' => '2026-09-30',
+                    'status' => 'LUNAS',
                 ]);
             } else {
-                // Untuk siswa lainnya: September 2026 BELUM BAYAR
+                // Budi Santoso & Citra Lestari: Menunggak September 2026 (lewat 30 September 2026)
                 TagihanSpp::create([
                     'id_siswa' => $siswa->id_siswa,
                     'id_tarif' => $tarif->id_tarif,
@@ -213,7 +211,7 @@ class DatabaseSeeder extends Seeder
                     'tahun' => 2026,
                     'nominal' => 350000,
                     'tanggal_jatuh_tempo' => '2026-09-30',
-                    'status' => 'BELUM BAYAR',
+                    'status' => 'TUNGGAKAN',
                 ]);
             }
         }

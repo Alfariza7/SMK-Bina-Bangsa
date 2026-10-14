@@ -47,7 +47,7 @@
                     <!-- User Avatar with Online Dot -->
                     <div class="relative">
                         <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-600 to-violet-500 text-white font-bold flex items-center justify-center text-xs shadow-md shadow-indigo-500/20">
-                            {{ strtoupper(substr(Auth::user()->nama, 0, 1)) }}
+                            {{ Auth::user()->initial }}
                         </div>
                         <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
                     </div>
@@ -75,8 +75,8 @@
                     
                     <!-- Dropdown Header Info -->
                     <div class="flex items-center gap-3.5 pb-4 border-b border-slate-100">
-                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-500 text-white font-bold flex items-center justify-center text-base shadow-md shadow-indigo-500/20 shrink-0">
-                            {{ strtoupper(substr(Auth::user()->nama, 0, 1)) }}
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-indigo-600 to-violet-500 text-white font-bold flex items-center justify-center text-base shadow-md shadow-indigo-500/20 shrink-0">
+                            {{ Auth::user()->initial }}
                         </div>
                         <div class="overflow-hidden">
                             <h4 class="text-sm font-bold text-slate-800 truncate">{{ Auth::user()->nama }}</h4>
@@ -151,20 +151,26 @@
 
         <!-- Flash Notifications -->
         @if(session('success'))
-            <div class="mx-6 mt-4 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs flex items-center justify-between shadow-sm">
+            <div x-data="{ show: true }" x-show="show" x-transition class="mx-6 mt-4 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs flex items-center justify-between shadow-sm">
                 <div class="flex items-center gap-2.5">
                     <span class="text-base">🎉</span>
                     <span class="font-medium">{{ session('success') }}</span>
                 </div>
+                <button type="button" @click="show = false" class="text-emerald-600 hover:text-emerald-900 p-1 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
             </div>
         @endif
 
         @if(session('error'))
-            <div class="mx-6 mt-4 p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-2xl text-xs flex items-center justify-between shadow-sm">
+            <div x-data="{ show: true }" x-show="show" x-transition class="mx-6 mt-4 p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-2xl text-xs flex items-center justify-between shadow-sm">
                 <div class="flex items-center gap-2.5">
                     <span class="text-base">⚠️</span>
                     <span class="font-medium">{{ session('error') }}</span>
                 </div>
+                <button type="button" @click="show = false" class="text-rose-600 hover:text-rose-900 p-1 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
             </div>
         @endif
 

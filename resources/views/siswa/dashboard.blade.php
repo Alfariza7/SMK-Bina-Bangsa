@@ -10,17 +10,23 @@
 
         <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-indigo-300">SELAMAT DATANG</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-300">PORTAL PEMBAYARAN SISWA</span>
                 <h1 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">{{ $siswa->nama }}</h1>
-                <div class="flex flex-wrap items-center gap-3 mt-2 text-xs text-indigo-200">
+                <div class="flex flex-wrap items-center gap-2 mt-3 text-xs text-indigo-200">
                     <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30 font-mono">
                         NIS: <strong>{{ $siswa->nis }}</strong>
+                    </span>
+                    <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30 font-mono">
+                        NISN: <strong>{{ $siswa->nisn ?? '0089123456' }}</strong>
                     </span>
                     <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30">
                         Kelas: <strong>{{ $siswa->kelas->nama_kelas ?? '-' }}</strong>
                     </span>
                     <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30">
-                        {{ $siswa->kelas->jurusan->nama_jurusan ?? '-' }}
+                        Jurusan: <strong>{{ $siswa->kelas->jurusan->nama_jurusan ?? '-' }}</strong>
+                    </span>
+                    <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30">
+                        T.A: <strong>{{ $siswa->tahunAjaran->tahun_ajaran ?? '2026/2027' }}</strong>
                     </span>
                 </div>
             </div>
@@ -73,21 +79,24 @@
                 </div>
             </div>
 
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 text-[11px] leading-relaxed">
-                <i class="fa-solid fa-circle-info text-indigo-500 mr-1"></i>
-                Lakukan transfer ke <strong>Nomor Virtual Account</strong> di atas. Status tagihan akan otomatis berubah menjadi <strong>LUNAS</strong> setelah transaksi dikonfirmasi oleh Payment Gateway.
-            </div>
+            @if(($tagihanBulanIni->status ?? 'BELUM BAYAR') === 'LUNAS')
+                <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-800 text-[11px] leading-relaxed flex items-start gap-2">
+                    <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                    <div>
+                        <p class="font-bold">Pembayaran bulan ini telah lunas terverifikasi otomatis oleh sistem.</p>
+                        <p class="text-[10px] text-emerald-700 mt-0.5">Histori transaksi resmi telah tercatat di Payment Gateway.</p>
+                    </div>
+                </div>
+            @else
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 text-[11px] leading-relaxed">
+                    <i class="fa-solid fa-circle-info text-indigo-500 mr-1"></i>
+                    Lakukan transfer ke <strong>Nomor Virtual Account</strong> di atas. Status tagihan akan otomatis berubah menjadi <strong>LUNAS</strong> setelah transaksi dikonfirmasi oleh Payment Gateway.
+                </div>
 
-            @if(($tagihanBulanIni->status ?? 'BELUM BAYAR') !== 'LUNAS')
                 <a href="{{ route('payment.simulator', ['va' => $siswa->virtualAccount->nomor_va ?? '']) }}" class="mt-4 w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md shadow-indigo-600/20">
                     <i class="fa-solid fa-bolt text-amber-300"></i>
                     <span>Bayar via Simulator Payment Gateway &rarr;</span>
                 </a>
-            @else
-                <div class="mt-4 p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700 text-xs font-semibold flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
-                    <span>Tagihan bulan ini telah Lunas Terverifikasi</span>
-                </div>
             @endif
         </div>
 

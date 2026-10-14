@@ -56,7 +56,7 @@
             <span>Pencarian Cepat Siswa & Status Pembayaran</span>
         </h2>
         <p class="text-xs text-slate-500 mb-4">
-            Cari data siswa berdasarkan <strong>Nomor Virtual Account (VA)</strong>, <strong>NIS</strong>, atau <strong>Nama Siswa</strong>.
+            Cari data siswa berdasarkan <strong>Nomor Virtual Account (VA)</strong>, <strong>NIS</strong>, <strong>NISN</strong>, <strong>Nama Siswa</strong>, atau <strong>ID Transaksi</strong> (LSP Poin V).
         </p>
 
         <form action="{{ route('teller.dashboard') }}" method="GET" class="flex flex-col sm:flex-row gap-3">
@@ -67,7 +67,7 @@
                 <input type="text" 
                        name="keyword" 
                        value="{{ $keyword }}" 
-                       placeholder="Masukkan Nomor VA (contoh: 8800012345) atau NIS (12345)..."
+                       placeholder="Masukkan Nomor VA, NIS, NISN, Nama Siswa, atau ID Transaksi..."
                        class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition font-mono">
             </div>
             <button type="submit" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-sm shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
@@ -156,7 +156,7 @@
                 @else
                     <div class="p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs flex items-center gap-2">
                         <i class="fa-solid fa-circle-exclamation text-rose-500"></i>
-                        <span>Data tidak ditemukan untuk kata kunci: "<strong>{{ $keyword }}</strong>". Pastikan NIS atau Nomor VA sudah benar.</span>
+                        <span>Data tidak ditemukan untuk kata kunci: "<strong>{{ $keyword }}</strong>". Pastikan Nomor VA, NIS, NISN, Nama, atau ID Transaksi sudah benar.</span>
                     </div>
                 @endif
             </div>
@@ -176,29 +176,34 @@
             <table class="w-full text-left text-xs">
                 <thead class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200/80">
                     <tr>
-                        <th class="py-3 px-4">Transaction ID</th>
+                        <th class="py-3 px-4">ID Transaksi</th>
                         <th class="py-3 px-4">Virtual Account</th>
                         <th class="py-3 px-4">Nama Siswa</th>
                         <th class="py-3 px-4">Nominal</th>
+                        <th class="py-3 px-4">Waktu Transaksi</th>
                         <th class="py-3 px-4">Status</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-slate-700">
                     @forelse($transaksiTerbaru as $trx)
                         <tr class="hover:bg-slate-50/80">
-                            <td class="py-3 px-4 font-mono font-medium">{{ $trx->transaction_id }}</td>
-                            <td class="py-3 px-4 font-mono text-indigo-600 font-medium">{{ $trx->virtual_account }}</td>
+                            <td class="py-3 px-4 font-mono font-medium text-indigo-600">{{ $trx->transaction_id }}</td>
+                            <td class="py-3 px-4 font-mono font-medium">{{ $trx->virtual_account }}</td>
                             <td class="py-3 px-4 font-medium">{{ $trx->siswa->nama ?? '-' }}</td>
                             <td class="py-3 px-4 font-semibold">Rp {{ number_format($trx->nominal, 0, ',', '.') }}</td>
+                            <td class="py-3 px-4 text-slate-500">
+                                {{ $trx->tanggal_transaksi ? \Carbon\Carbon::parse($trx->tanggal_transaksi . ' ' . $trx->waktu_transaksi)->format('d/m/Y H:i') : $trx->created_at->format('d/m/Y H:i') }}
+                            </td>
                             <td class="py-3 px-4">
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">
-                                    {{ $trx->status_transaksi }}
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold 
+                                    {{ $trx->status_transaksi === 'PAID' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' }}">
+                                    {{ $trx->status_transaksi === 'PAID' ? 'LUNAS' : $trx->status_transaksi }}
                                 </span>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="py-6 text-center text-slate-400">
+                            <td colspan="6" class="py-6 text-center text-slate-400">
                                 Belum ada transaksi terbaru hari ini.
                             </td>
                         </tr>

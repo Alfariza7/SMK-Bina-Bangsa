@@ -63,15 +63,20 @@ class PaymentGatewayTest extends TestCase
             ]
         );
 
+        $idTarif = TarifSpp::first()?->id_tarif ?? 1;
+        $idTahun = TahunAjaran::first()?->id_tahun_ajaran ?? 1;
+
         $this->tagihan = TagihanSpp::firstOrCreate(
             [
                 'id_siswa' => $this->siswa->id_siswa,
-                'bulan' => 'Oktober',
+                'bulan' => 'September',
                 'tahun' => 2026,
             ],
             [
+                'id_tarif' => $idTarif,
+                'id_tahun_ajaran' => $idTahun,
                 'nominal' => 350000,
-                'tanggal_jatuh_tempo' => '2026-10-31',
+                'tanggal_jatuh_tempo' => '2026-09-30',
                 'status' => 'BELUM BAYAR',
             ]
         );
@@ -256,6 +261,31 @@ class PaymentGatewayTest extends TestCase
         $this->assertDatabaseHas('transaksi_payment_gateway', [
             'transaction_id' => $trxId,
             'status_transaksi' => 'FAILED',
+        ]);
+    }
+
+    /**
+     * Test Fitur Reset Demo Siswa Ahmad Fauzan (September 2026 BELUM BAYAR)
+     */
+    public function test_reset_demo_restores_ahmad_fauzan_bill_to_belum_bayar(): void
+    {
+        $response = $this->postJson(route('payment.reset_demo'));
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'success' => true,
+            'data' => [
+                'nis' => '12345',
+                'status' => 'BELUM BAYAR',
+                'nominal' => 350000,
+            ]
+        ]);
+
+        $this->assertDatabaseHas('tagihan_spp', [
+            'id_siswa' => $this->siswa->id_siswa,
+            'bulan' => 'September',
+            'tahun' => 2026,
+            'status' => 'BELUM BAYAR',
         ]);
     }
 }

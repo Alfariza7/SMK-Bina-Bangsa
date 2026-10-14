@@ -23,15 +23,21 @@ class TellerDashboardController extends Controller
         $keyword = $request->query('keyword');
 
         if ($keyword) {
-            // Pencarian berdasarkan NIS, Nama, atau Nomor VA
-            $searchResult = Siswa::with(['kelas.jurusan', 'virtualAccount', 'tagihanSpp'])
-                ->where('nis', $keyword)
-                ->orWhere('nisn', $keyword)
-                ->orWhere('nama', 'like', "%{$keyword}%")
-                ->orWhereHas('virtualAccount', function ($q) use ($keyword) {
-                    $q->where('nomor_va', $keyword);
-                })
-                ->first();
+            // Mendukung 5 parameter wajib LSP Poin V: VA, NIS, NISN, Nama, atau Transaction ID
+            $trx = TransaksiPaymentGateway::where('transaction_id', $keyword)->first();
+            if ($trx && $trx->id_siswa) {
+                $searchResult = Siswa::with(['kelas.jurusan', 'virtualAccount', 'tagihanSpp'])
+                    ->find($trx->id_siswa);
+            } else {
+                $searchResult = Siswa::with(['kelas.jurusan', 'virtualAccount', 'tagihanSpp'])
+                    ->where('nis', $keyword)
+                    ->orWhere('nisn', $keyword)
+                    ->orWhere('nama', 'like', "%{$keyword}%")
+                    ->orWhereHas('virtualAccount', function ($q) use ($keyword) {
+                        $q->where('nomor_va', $keyword);
+                    })
+                    ->first();
+            }
         }
 
         return view('teller.dashboard', compact(

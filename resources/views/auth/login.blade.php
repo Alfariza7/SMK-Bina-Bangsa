@@ -27,13 +27,13 @@
         <div class="relative z-10 w-full overflow-hidden shrink-0">
             <img src="{{ asset('images/banner-smk.jpg') }}" 
                  alt="Gedung SMK Bina Bangsa" 
-                 class="w-full h-44 sm:h-52 lg:h-56 object-cover object-top block">
+                 class="w-full h-40 sm:h-48 lg:h-52 object-cover object-top block">
             <!-- Fade Overlay Bawah (Menghilangkan Garis Potong Kaku) -->
-            <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#131129] via-[#131129]/75 to-transparent pointer-events-none"></div>
+            <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#131129] via-[#131129]/85 to-transparent pointer-events-none"></div>
         </div>
 
         <!-- 3. Headline & Keunggulan Sistem (Rata Tengah & Pas di Layar) -->
-        <div class="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center w-full px-6 sm:px-10 pb-8 pt-0 my-auto">
+        <div class="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center w-full px-6 sm:px-10 pb-6 pt-0 my-auto">
             
             <!-- Headline Utama (Tanpa Redundansi Nama Sekolah) -->
             <h1 class="text-2xl sm:text-3xl font-black text-white leading-tight tracking-tight">
@@ -42,12 +42,12 @@
             </h1>
 
             <!-- Subtitle Paragraf (Lebar Rapi Tanpa Orphan Word) -->
-            <p class="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto" style="text-wrap: balance;">
+            <p class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm mx-auto" style="text-wrap: balance;">
                 Tidak perlu antre dan tanpa konfirmasi manual. Setiap siswa memiliki nomor Virtual Account unik yang terhubung langsung ke sistem verifikasi otomatis.
             </p>
 
             <!-- 3 Poin Keunggulan (Bahasa Pengguna, Bukan Istilah Teknis Developer) -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full mt-6 text-left">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full mt-5 text-left">
                 <div class="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                     <div class="text-indigo-400 text-sm mb-1">
                         <i class="fa-solid fa-bolt"></i>
@@ -80,16 +80,16 @@
     </div>
 
     <!-- PANEL KANAN: Form Login Cardless (Bersih, Lega, Bebas Scrollbar Desktop) -->
-    <div class="lg:w-5/12 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-8 bg-white relative lg:h-screen lg:overflow-hidden">
+    <div class="lg:w-5/12 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-6 lg:py-8 bg-white relative lg:h-screen lg:overflow-hidden">
         <div class="w-full max-w-sm mx-auto">
             
             <!-- Header Form (Clean, Tanpa Badge Redundan) -->
-            <div class="mb-6">
+            <div class="mb-5">
                 <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                     Masuk ke Akun Anda
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
-                    Masukkan NIS dan Password Anda untuk melanjutkan
+                    Masukkan NIS atau Username beserta Password Anda
                 </p>
             </div>
 
@@ -119,10 +119,10 @@
             <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
                 @csrf
 
-                <!-- Field NIS (Label Bersih, Ikon di Dalam Input) -->
+                <!-- Field NIS / Username (Label Bersih, Ikon di Dalam Input) -->
                 <div>
                     <label for="username" class="block text-xs font-bold text-slate-700 mb-1.5">
-                        NIS <span class="text-rose-500">*</span>
+                        NIS / Username <span class="text-rose-500">*</span>
                     </label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
@@ -132,7 +132,7 @@
                                name="username" 
                                id="username" 
                                value="{{ old('username') }}"
-                               placeholder="Contoh: 12345"
+                               placeholder="Masukkan NIS (Siswa) atau Username..."
                                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border @error('username') border-rose-400 bg-rose-50/30 ring-2 ring-rose-200 @else border-slate-200 @enderror rounded-xl text-sm font-medium focus:outline-none focus:ring-4 focus:ring-indigo-100 focus:border-indigo-500 focus:bg-white transition duration-150">
                     </div>
                     @error('username')
@@ -171,21 +171,22 @@
                     @enderror
                 </div>
 
-                <!-- Tombol Masuk (Tegas Berbahasa Indonesia, Tanpa Kata Ganda "Login") -->
+                <!-- Tombol Masuk ke Portal (Tegas Berbahasa Indonesia Sesuai LSP) -->
                 <div class="pt-2">
                     <button type="submit" 
                             class="w-full py-3 px-4 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 active:scale-[0.99] text-white font-bold rounded-xl text-sm shadow-md shadow-indigo-600/25 transition duration-150 flex items-center justify-center gap-2 cursor-pointer">
-                        <span>Masuk</span>
+                        <span>Masuk ke Portal</span>
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </button>
                 </div>
             </form>
 
-            <!-- Info Bantuan dengan CTA Interaktif Jelas -->
-            <div class="mt-8 pt-5 border-t border-slate-100 text-center space-y-1.5">
+            <!-- Info Bantuan dengan CTA WhatsApp Aktif -->
+            <div class="mt-6 pt-4 border-t border-slate-100 text-center space-y-1">
                 <p class="text-xs text-slate-500">Lupa password atau kendala akun?</p>
-                <a href="https://wa.me/6289508015161?text=Halo%20Tata%20Usaha%20SMK%20Bina%20Bangsa,%20saya%20mengalami%20kendala%20login%20SPP" 
+                <a href="https://wa.me/62318856731?text=Halo%20Staf%20TU%20SMK%20Bina%20Bangsa,%20saya%20mengalami%20kendala%20login%20Portal%20SPP%20dengan%20NIS/Username:%20" 
                    target="_blank" 
+                   rel="noopener noreferrer"
                    class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-700 transition">
                     <i class="fa-brands fa-whatsapp text-sm"></i>
                     <span>Hubungi Tata Usaha via WhatsApp ↗</span>
@@ -193,7 +194,7 @@
             </div>
 
             <!-- Footer Hak Cipta -->
-            <p class="text-center text-[11px] text-slate-400 mt-6">
+            <p class="text-center text-[11px] text-slate-400 mt-5">
                 &copy; {{ date('Y') }} SMK Bina Bangsa • All Rights Reserved
             </p>
         </div>

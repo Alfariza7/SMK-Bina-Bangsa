@@ -36,4 +36,19 @@ class User extends Authenticatable
     {
         return $this->hasOne(Siswa::class, 'id_user', 'id_user');
     }
+
+    /**
+     * Inisial nama cerdas (mengabaikan gelar di depan seperti Drs., Ir., Prof., H., Hj., dsb.)
+     */
+    public function getInitialAttribute(): string
+    {
+        $nama = trim($this->nama ?? $this->username ?? 'U');
+        // Bersihkan gelar umum di depan
+        $prefixPattern = '/^(dr\.|drs\.|dra\.|drg\.|ir\.|prof\.|kh\.|h\.|hj\.|ustadz\.|ust\.|st\.|spd\.|mpd\.)\s+/i';
+        while (preg_match($prefixPattern, $nama)) {
+            $nama = preg_replace($prefixPattern, '', $nama);
+        }
+        $nama = trim($nama);
+        return strtoupper(substr($nama, 0, 1)) ?: 'U';
+    }
 }
