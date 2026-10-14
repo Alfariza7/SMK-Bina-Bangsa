@@ -3,8 +3,8 @@
     <div>
         <!-- School Brand Header -->
         <div class="p-5 border-b border-slate-800/80 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-500 text-white flex items-center justify-center font-bold shadow-md shadow-indigo-600/30">
-                <i class="fa-solid fa-graduation-cap"></i>
+            <div class="w-10 h-10 rounded-2xl bg-white p-1 flex items-center justify-center shadow-md shadow-indigo-950/40 shrink-0 ring-1 ring-white/20">
+                <img src="{{ asset('images/logo-smk-cropped.png') }}" alt="Logo SMK Bina Bangsa" class="w-full h-full object-contain">
             </div>
             <div>
                 <h2 class="font-extrabold text-sm text-white leading-tight">SMK BINA BANGSA</h2>
