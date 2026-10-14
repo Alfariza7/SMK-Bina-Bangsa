@@ -181,7 +181,7 @@
                             <td class="py-3 px-4 font-mono text-indigo-600 font-medium">{{ $trx->virtual_account }}</td>
                             <td class="py-3 px-4 font-medium">{{ $trx->siswa->nama ?? '-' }}</td>
                             <td class="py-3 px-4 font-semibold">Rp {{ number_format($trx->nominal, 0, ',', '.') }}</td>
-                            <td class="py-3 px-4 text-slate-500">{{ $trx->created_at->format('d/m/Y H:i') }}</td>
+                            <td class="py-3 px-4 text-slate-500">{{ $trx->waktu_formatted }}</td>
                             <td class="py-3 px-4">
                                 <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">
                                     {{ $trx->status_transaksi }}

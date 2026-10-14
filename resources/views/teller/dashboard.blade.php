@@ -192,7 +192,7 @@
                             <td class="py-3 px-4 font-medium">{{ $trx->siswa->nama ?? '-' }}</td>
                             <td class="py-3 px-4 font-semibold">Rp {{ number_format($trx->nominal, 0, ',', '.') }}</td>
                             <td class="py-3 px-4 text-slate-500">
-                                {{ $trx->tanggal_transaksi ? \Carbon\Carbon::parse($trx->tanggal_transaksi . ' ' . $trx->waktu_transaksi)->format('d/m/Y H:i') : $trx->created_at->format('d/m/Y H:i') }}
+                                {{ $trx->waktu_formatted }}
                             </td>
                             <td class="py-3 px-4">
                                 <span class="px-2.5 py-1 rounded-full text-[10px] font-bold 

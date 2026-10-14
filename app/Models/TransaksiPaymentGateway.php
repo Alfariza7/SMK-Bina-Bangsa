@@ -39,4 +39,17 @@ class TransaksiPaymentGateway extends Model
     {
         return $this->hasOne(Pembayaran::class, 'id_transaksi', 'id_transaksi');
     }
+
+    public function getWaktuFormattedAttribute(): string
+    {
+        if ($this->tanggal_transaksi) {
+            $date = $this->tanggal_transaksi instanceof \Carbon\Carbon
+                ? $this->tanggal_transaksi->format('d/m/Y')
+                : \Carbon\Carbon::parse($this->tanggal_transaksi)->format('d/m/Y');
+            $time = $this->waktu_transaksi ? ' ' . substr($this->waktu_transaksi, 0, 5) : '';
+            return $date . $time;
+        }
+
+        return $this->created_at ? $this->created_at->format('d/m/Y H:i') : '-';
+    }
 }
