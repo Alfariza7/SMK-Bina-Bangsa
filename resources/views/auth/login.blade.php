@@ -5,25 +5,24 @@
 @section('content')
 <div class="min-h-screen flex flex-col lg:flex-row bg-slate-900 overflow-hidden font-sans">
     
-    <!-- PANEL KIRI: Banner Sebagai Header di Atas, Text Center, & 3 Keunggulan -->
-    <div class="lg:w-7/12 relative flex flex-col justify-between p-6 sm:p-10 lg:p-12 bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white overflow-hidden">
+    <!-- PANEL KIRI: Banner Full Edge-to-Edge di Atas, Text Center, & 3 Keunggulan -->
+    <div class="lg:w-7/12 relative flex flex-col justify-between bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white overflow-hidden">
         <!-- Glow Decorative Effects -->
         <div class="absolute -top-24 -left-24 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(#312e81_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none"></div>
 
-        <!-- 1. GAMBAR BANNER DENGAN EFEK FADE SEAMLESS -->
-        <div class="relative z-10 w-full overflow-hidden rounded-3xl">
+        <!-- 1. GAMBAR BANNER FULL BLEED (EDGE-TO-EDGE, TANPA JARAK/SPACE) -->
+        <div class="relative z-10 w-full overflow-hidden">
             <img src="{{ asset('images/banner-smk.jpg') }}" 
                  alt="Header Banner SMK Bina Bangsa" 
-                 class="w-full h-auto object-cover block">
-            <!-- Efek Fade Menyatu Alami dengan Latar Belakang -->
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent"></div>
-            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                 class="w-full h-auto max-h-[320px] object-cover block">
+            <!-- Efek Fade Lembut di Bawah Banner Menyatu ke Konten -->
+            <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
         </div>
 
-        <!-- 2. CONTENT TEXT DI BAWAH BANNER (SEMUA POSISI CENTER) -->
-        <div class="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center w-full my-auto py-5">
+        <!-- 2. CONTENT TEXT DI BAWAH BANNER (SEMUA POSISI CENTER, DENGAN PADDING) -->
+        <div class="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center w-full px-6 sm:px-10 lg:px-12 pb-10 pt-2 my-auto">
             <!-- Headline Utama (Center) -->
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight mt-1">
                 Bayar SPP Lebih Praktis <br class="hidden sm:inline">
