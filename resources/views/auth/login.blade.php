@@ -5,20 +5,19 @@
 @section('content')
 <div class="min-h-screen flex flex-col lg:flex-row bg-slate-900 overflow-hidden font-sans">
     
-    <!-- PANEL KIRI: Banner Full Edge-to-Edge di Atas, Text Center, & 3 Keunggulan -->
-    <div class="lg:w-7/12 relative flex flex-col justify-between bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white overflow-hidden">
-        <!-- Glow Decorative Effects -->
-        <div class="absolute -top-24 -left-24 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(#312e81_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none"></div>
+    <!-- PANEL KIRI: Banner Full Edge-to-Edge di Atas & Transisi Warna Menyatu Sempurna -->
+    <div class="lg:w-7/12 relative flex flex-col justify-between text-white overflow-hidden" style="background: linear-gradient(180deg, #18193a 0%, #11122a 100%);">
+        <!-- Glow Decorative Effects Halus -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <!-- 1. GAMBAR BANNER FULL BLEED (EDGE-TO-EDGE, TANPA JARAK/SPACE) -->
+        <!-- 1. GAMBAR BANNER FULL BLEED DENGAN FADE MENYATU TOTAL -->
         <div class="relative z-10 w-full overflow-hidden">
             <img src="{{ asset('images/banner-smk.jpg') }}" 
                  alt="Header Banner SMK Bina Bangsa" 
-                 class="w-full h-auto max-h-[320px] object-cover block">
-            <!-- Efek Fade Lembut di Bawah Banner Menyatu ke Konten -->
-            <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+                 class="w-full h-auto max-h-[340px] object-cover block">
+            <!-- Fade Gradasi yang Menggunakan Warna Persis Sama dengan Background (#18193a) -->
+            <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#18193a] via-[#18193a]/80 to-transparent pointer-events-none"></div>
         </div>
 
         <!-- 2. CONTENT TEXT DI BAWAH BANNER (SEMUA POSISI CENTER, DENGAN PADDING) -->
