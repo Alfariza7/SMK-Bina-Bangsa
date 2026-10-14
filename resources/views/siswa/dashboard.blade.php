@@ -80,23 +80,26 @@
             </div>
 
             @if(($tagihanBulanIni->status ?? 'BELUM BAYAR') === 'LUNAS')
-                <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-800 text-[11px] leading-relaxed flex items-start gap-2">
-                    <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                <div class="p-3.5 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-800 text-[11px] leading-relaxed flex items-start gap-2.5">
+                    <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 text-base"></i>
                     <div>
-                        <p class="font-bold">Pembayaran bulan ini telah lunas terverifikasi otomatis oleh sistem.</p>
-                        <p class="text-[10px] text-emerald-700 mt-0.5">Histori transaksi resmi telah tercatat di Payment Gateway.</p>
+                        <p class="font-bold text-xs">Pembayaran bulan ini telah LUNAS terverifikasi otomatis!</p>
+                        <p class="text-[10px] text-emerald-700 mt-0.5">Histori transaksi resmi telah tercatat di Payment Gateway perbankan.</p>
                     </div>
                 </div>
+
+                @if($tagihanBulanIni->pembayaran && $tagihanBulanIni->pembayaran->id_transaksi)
+                    <a href="{{ route('transaksi.kuitansi', $tagihanBulanIni->pembayaran->id_transaksi) }}" target="_blank"
+                       class="mt-3.5 w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20">
+                        <i class="fa-solid fa-print"></i>
+                        <span>Cetak Bukti Pembayaran (Kuitansi Lunas)</span>
+                    </a>
+                @endif
             @else
                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 text-[11px] leading-relaxed">
                     <i class="fa-solid fa-circle-info text-indigo-500 mr-1"></i>
-                    Lakukan transfer ke <strong>Nomor Virtual Account</strong> di atas. Status tagihan akan otomatis berubah menjadi <strong>LUNAS</strong> setelah transaksi dikonfirmasi oleh Payment Gateway.
+                    Lakukan transfer melalui ATM / M-Banking ke <strong>Nomor Virtual Account</strong> di atas. Status tagihan akan otomatis berubah menjadi <strong>LUNAS</strong> detik itu juga setelah transfer berhasil diverifikasi oleh bank.
                 </div>
-
-                <a href="{{ route('payment.simulator', ['va' => $siswa->virtualAccount->nomor_va ?? '']) }}" class="mt-4 w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md shadow-indigo-600/20">
-                    <i class="fa-solid fa-bolt text-amber-300"></i>
-                    <span>Bayar via Simulator Payment Gateway &rarr;</span>
-                </a>
             @endif
         </div>
 
@@ -158,6 +161,7 @@
                         <th class="py-3 px-5">Nominal</th>
                         <th class="py-3 px-5">Jatuh Tempo</th>
                         <th class="py-3 px-5">Status</th>
+                        <th class="py-3 px-5 text-center">Bukti Bayar</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-slate-700">
@@ -181,10 +185,21 @@
                                     {{ $item->status }}
                                 </span>
                             </td>
+                            <td class="py-3.5 px-5 text-center">
+                                @if($item->status === 'LUNAS' && $item->pembayaran && $item->pembayaran->id_transaksi)
+                                    <a href="{{ route('transaksi.kuitansi', $item->pembayaran->id_transaksi) }}" target="_blank"
+                                       class="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-lg text-xs font-bold transition">
+                                        <i class="fa-solid fa-receipt text-[10px]"></i>
+                                        <span>Kuitansi</span>
+                                    </a>
+                                @else
+                                    <span class="text-slate-300">-</span>
+                                @endif
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="py-6 text-center text-slate-400">
+                            <td colspan="5" class="py-6 text-center text-slate-400">
                                 Belum ada data riwayat tagihan.
                             </td>
                         </tr>

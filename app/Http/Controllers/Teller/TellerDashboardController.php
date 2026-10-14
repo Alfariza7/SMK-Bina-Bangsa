@@ -26,10 +26,10 @@ class TellerDashboardController extends Controller
             // Mendukung 5 parameter wajib LSP Poin V: VA, NIS, NISN, Nama, atau Transaction ID
             $trx = TransaksiPaymentGateway::where('transaction_id', $keyword)->first();
             if ($trx && $trx->id_siswa) {
-                $searchResult = Siswa::with(['kelas.jurusan', 'virtualAccount', 'tagihanSpp'])
+                $searchResult = Siswa::with(['kelas.jurusan', 'virtualAccount', 'tagihanSpp.pembayaran'])
                     ->find($trx->id_siswa);
             } else {
-                $searchResult = Siswa::with(['kelas.jurusan', 'virtualAccount', 'tagihanSpp'])
+                $searchResult = Siswa::with(['kelas.jurusan', 'virtualAccount', 'tagihanSpp.pembayaran'])
                     ->where('nis', $keyword)
                     ->orWhere('nisn', $keyword)
                     ->orWhere('nama', 'like', "%{$keyword}%")

@@ -172,6 +172,7 @@
                         <th class="py-3 px-4">Nominal</th>
                         <th class="py-3 px-4">Waktu</th>
                         <th class="py-3 px-4">Status</th>
+                        <th class="py-3 px-4 text-center">Kuitansi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-slate-700">
@@ -187,10 +188,17 @@
                                     {{ $trx->status_transaksi }}
                                 </span>
                             </td>
+                            <td class="py-3 px-4 text-center">
+                                <a href="{{ route('transaksi.kuitansi', $trx->id_transaksi) }}" target="_blank"
+                                   class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold transition">
+                                    <i class="fa-solid fa-print text-[10px]"></i>
+                                    <span>Cetak</span>
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="py-6 text-center text-slate-400">
+                            <td colspan="7" class="py-6 text-center text-slate-400">
                                 Belum ada transaksi tercatat. Demonstrasi Payment Gateway dapat dicoba di menu simulator.
                             </td>
                         </tr>

@@ -21,10 +21,11 @@ class SiswaDashboardController extends Controller
         }
 
         // Tagihan bulan ini / aktif
-        $tagihanBulanIni = TagihanSpp::where('id_siswa', $siswa->id_siswa)
+        $tagihanBulanIni = TagihanSpp::with('pembayaran.transaksiPaymentGateway')
+            ->where('id_siswa', $siswa->id_siswa)
             ->where('bulan', 'September')
             ->where('tahun', 2026)
-            ->first() ?? TagihanSpp::where('id_siswa', $siswa->id_siswa)->latest()->first();
+            ->first() ?? TagihanSpp::with('pembayaran.transaksiPaymentGateway')->where('id_siswa', $siswa->id_siswa)->latest()->first();
 
         // Daftar Tunggakan
         $daftarTunggakan = TagihanSpp::where('id_siswa', $siswa->id_siswa)
@@ -33,7 +34,8 @@ class SiswaDashboardController extends Controller
         $totalTunggakan = $daftarTunggakan->sum('nominal');
 
         // Riwayat Seluruh Tagihan / Pembayaran
-        $riwayatTagihan = TagihanSpp::where('id_siswa', $siswa->id_siswa)
+        $riwayatTagihan = TagihanSpp::with('pembayaran.transaksiPaymentGateway')
+            ->where('id_siswa', $siswa->id_siswa)
             ->orderBy('id_tagihan', 'desc')
             ->get();
 

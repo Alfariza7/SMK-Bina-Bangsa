@@ -136,7 +136,7 @@
                                                 <p class="text-[11px] text-slate-400">Jatuh Tempo: {{ \Carbon\Carbon::parse($tagihan->tanggal_jatuh_tempo)->format('d/m/Y') }}</p>
                                             </div>
                                         </div>
-                                        <div class="flex items-center gap-4">
+                                        <div class="flex items-center gap-3">
                                             <span class="text-xs font-semibold text-slate-700">Rp {{ number_format($tagihan->nominal, 0, ',', '.') }}</span>
                                             <span class="px-2.5 py-1 rounded-md text-[10px] font-bold
                                                 {{ $tagihan->status === 'LUNAS' ? 'bg-emerald-100 text-emerald-700' : '' }}
@@ -145,6 +145,13 @@
                                             ">
                                                 {{ $tagihan->status }}
                                             </span>
+                                            @if($tagihan->status === 'LUNAS' && $tagihan->pembayaran && $tagihan->pembayaran->id_transaksi)
+                                                <a href="{{ route('transaksi.kuitansi', $tagihan->pembayaran->id_transaksi) }}" target="_blank"
+                                                   class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-lg text-[10px] font-bold transition">
+                                                    <i class="fa-solid fa-receipt text-[9px]"></i>
+                                                    <span>Kuitansi</span>
+                                                </a>
+                                            @endif
                                         </div>
                                     </div>
                                 @empty
@@ -182,6 +189,7 @@
                         <th class="py-3 px-4">Nominal</th>
                         <th class="py-3 px-4">Waktu Transaksi</th>
                         <th class="py-3 px-4">Status</th>
+                        <th class="py-3 px-4 text-center">Kuitansi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-slate-700">
@@ -200,10 +208,17 @@
                                     {{ $trx->status_transaksi === 'PAID' ? 'LUNAS' : $trx->status_transaksi }}
                                 </span>
                             </td>
+                            <td class="py-3 px-4 text-center">
+                                <a href="{{ route('transaksi.kuitansi', $trx->id_transaksi) }}" target="_blank"
+                                   class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold transition">
+                                    <i class="fa-solid fa-print text-[10px]"></i>
+                                    <span>Cetak</span>
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="py-6 text-center text-slate-400">
+                            <td colspan="7" class="py-6 text-center text-slate-400">
                                 Belum ada transaksi terbaru hari ini.
                             </td>
                         </tr>
