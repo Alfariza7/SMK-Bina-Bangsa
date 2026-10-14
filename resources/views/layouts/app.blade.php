@@ -48,82 +48,10 @@
                 </span>
             </div>
 
-            <!-- Nav Links according to Role -->
+            <!-- Nav Links according to Role (Modular Per-Role Components) -->
             <nav class="px-3 space-y-1 text-xs font-semibold">
-                @if(Auth::user()->role === 'admin')
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-600/25">
-                        <i class="fa-solid fa-chart-pie w-4 text-center"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <div class="pt-4 pb-1 px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">Master Data</div>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-user-graduate w-4 text-center"></i>
-                        <span>Data Siswa</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-school w-4 text-center"></i>
-                        <span>Kelas & Jurusan</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-money-bill-wave w-4 text-center"></i>
-                        <span>Tarif SPP</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-credit-card w-4 text-center"></i>
-                        <span>Virtual Account</span>
-                    </a>
-                    <div class="pt-4 pb-1 px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">Transaksi & Laporan</div>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-receipt w-4 text-center"></i>
-                        <span>Tagihan Siswa</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-clock-rotate-left w-4 text-center"></i>
-                        <span>Transaksi PG</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-file-lines w-4 text-center"></i>
-                        <span>Laporan SPP</span>
-                    </a>
-                @elseif(Auth::user()->role === 'kepala_sekolah')
-                    <a href="{{ route('kepsek.dashboard') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-amber-600 text-white shadow-md shadow-amber-600/25">
-                        <i class="fa-solid fa-chart-line w-4 text-center"></i>
-                        <span>Dashboard Monitoring</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-user-graduate w-4 text-center"></i>
-                        <span>Data Siswa</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-receipt w-4 text-center"></i>
-                        <span>Monitoring Tagihan</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-file-invoice-dollar w-4 text-center"></i>
-                        <span>Laporan Rekap</span>
-                    </a>
-                @elseif(Auth::user()->role === 'teller')
-                    <a href="{{ route('teller.dashboard') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-cyan-600 text-white shadow-md shadow-cyan-600/25">
-                        <i class="fa-solid fa-magnifying-glass-dollar w-4 text-center"></i>
-                        <span>Layanan & Pencarian</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-clock-rotate-left w-4 text-center"></i>
-                        <span>Riwayat Transaksi</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-print w-4 text-center"></i>
-                        <span>Cetak Laporan</span>
-                    </a>
-                @elseif(Auth::user()->role === 'siswa')
-                    <a href="{{ route('siswa.dashboard') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/25">
-                        <i class="fa-solid fa-wallet w-4 text-center"></i>
-                        <span>Tagihan & Profil Saya</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
-                        <i class="fa-solid fa-clock-rotate-left w-4 text-center"></i>
-                        <span>Riwayat Pembayaran</span>
-                    </a>
+                @if(view()->exists('components.sidebar.' . Auth::user()->role))
+                    @include('components.sidebar.' . Auth::user()->role)
                 @endif
             </nav>
         </div>
