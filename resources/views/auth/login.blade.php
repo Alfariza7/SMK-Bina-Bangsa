@@ -12,24 +12,20 @@
         <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(#312e81_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none"></div>
 
-        <!-- 1. GAMBAR BANNER SEBAGAI HEADER DI PALING ATAS -->
-        <div class="relative z-10 w-full rounded-2xl overflow-hidden shadow-2xl shadow-indigo-950/80 border border-indigo-400/20">
+        <!-- 1. GAMBAR BANNER DENGAN EFEK FADE SEAMLESS -->
+        <div class="relative z-10 w-full overflow-hidden rounded-3xl">
             <img src="{{ asset('images/banner-smk.jpg') }}" 
                  alt="Header Banner SMK Bina Bangsa" 
                  class="w-full h-auto object-cover block">
+            <!-- Efek Fade Menyatu Alami dengan Latar Belakang -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-900 to-transparent"></div>
         </div>
 
         <!-- 2. CONTENT TEXT DI BAWAH BANNER (SEMUA POSISI CENTER) -->
-        <div class="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center w-full my-auto py-6">
-            
-            <!-- Badge Sambutan (Center) -->
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/25 text-indigo-300 text-xs font-semibold mb-4 backdrop-blur-sm">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Sistem Pembayaran 100% Cashless & Otomatis</span>
-            </div>
-
+        <div class="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center w-full my-auto py-5">
             <!-- Headline Utama (Center) -->
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight mt-1">
                 Bayar SPP Lebih Praktis <br class="hidden sm:inline">
                 dengan <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-300 to-violet-400">Virtual Account</span>
             </h1>
