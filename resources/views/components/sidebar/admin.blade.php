@@ -43,3 +43,9 @@
     <i class="fa-solid fa-file-lines w-4 text-center"></i>
     <span>Laporan SPP</span>
 </a>
+
+<div class="pt-4 pb-1 px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">Developer & Demo LSP</div>
+<a href="{{ route('payment.simulator') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl {{ request()->routeIs('payment.simulator') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 transition' }}">
+    <i class="fa-solid fa-bolt text-amber-400 w-4 text-center"></i>
+    <span>Simulator & Webhook</span>
+</a>
