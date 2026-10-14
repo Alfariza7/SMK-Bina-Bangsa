@@ -174,19 +174,21 @@
                 </h3>
             </div>
 
-            <!-- Digital Verification Stamp -->
+            <!-- Digital Verification Stamp & Signature -->
             <div class="text-center">
                 <p class="text-[10px] text-slate-400">Sidoarjo, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
-                <div class="my-2 p-2 border-2 border-emerald-600 rounded-xl inline-block bg-emerald-50/40 rotate-[-4deg]">
-                    <span class="text-[9px] font-extrabold text-emerald-800 block uppercase tracking-wider">
-                        ★ LUNAS OTOMATIS ★
-                    </span>
-                    <span class="text-[8px] text-emerald-700 font-mono block">
-                        PAYMENT GATEWAY VERIFIED
-                    </span>
+                <div class="h-16 flex items-center justify-center my-1 relative">
+                    <img src="{{ asset('images/ttd-admin.png') }}" alt="Tanda Tangan Petugas" class="h-14 w-auto object-contain mx-auto">
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-85">
+                        <div class="border border-emerald-600 rounded-lg px-2 py-0.5 bg-emerald-50/60 rotate-[-4deg]">
+                            <span class="text-[8px] font-extrabold text-emerald-800 block uppercase tracking-wider">
+                                ★ LUNAS OTOMATIS ★
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-xs font-bold text-slate-800">Sistem SPP SMK Bina Bangsa</p>
-                <p class="text-[10px] text-slate-400 font-mono">100% Cashless System</p>
+                <p class="text-xs font-bold text-slate-800 underline">Petugas Kasir / Admin SPP</p>
+                <p class="text-[10px] text-slate-400 font-mono">100% Cashless Verified</p>
             </div>
         </div>
 

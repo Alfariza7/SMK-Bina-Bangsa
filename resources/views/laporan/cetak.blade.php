@@ -194,15 +194,12 @@
         </div>
 
         <!-- Kolom Tanda Tangan Resmi -->
-        <div class="grid grid-cols-2 gap-8 text-xs text-center mt-12 pt-4">
+        <div class="grid grid-cols-2 gap-8 text-xs text-center mt-10 pt-4">
             <div>
                 <p class="text-slate-600">Mengetahui,</p>
                 <p class="font-bold text-slate-900 mt-0.5">Kepala SMK Bina Bangsa</p>
-                <div class="h-20 flex items-center justify-center">
-                    <!-- Digital Validation Stamp Mark -->
-                    <div class="border border-indigo-200 bg-indigo-50/50 text-indigo-800 px-3 py-1 rounded-lg text-[9px] font-bold tracking-wider uppercase rotate-[-3deg]">
-                        TERVALIDASI SISTEM SPP ONLINE
-                    </div>
+                <div class="h-24 flex items-center justify-center my-2 relative">
+                    <img src="{{ asset('images/ttd-kepsek.png') }}" alt="Tanda Tangan Kepala Sekolah" class="h-20 w-auto object-contain mx-auto">
                 </div>
                 <p class="font-extrabold text-slate-900 underline">Drs. H. Mulyadi, M.Pd.</p>
                 <p class="text-[10px] text-slate-500">NIP. 19680514 199403 1 004</p>
@@ -210,14 +207,12 @@
 
             <div>
                 <p class="text-slate-600">Sidoarjo, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
-                <p class="font-bold text-slate-900 mt-0.5">Petugas / Bendahara SPP</p>
-                <div class="h-20 flex items-center justify-center">
-                    <div class="border border-emerald-200 bg-emerald-50/50 text-emerald-800 px-3 py-1 rounded-lg text-[9px] font-bold tracking-wider uppercase rotate-[-3deg]">
-                        E-PAYMENT VERIFIED
-                    </div>
+                <p class="font-bold text-slate-900 mt-0.5">Petugas / Administrator SPP</p>
+                <div class="h-24 flex items-center justify-center my-2 relative">
+                    <img src="{{ asset('images/ttd-admin.png') }}" alt="Tanda Tangan Administrator" class="h-20 w-auto object-contain mx-auto">
                 </div>
                 <p class="font-extrabold text-slate-900 underline">{{ Auth::user()->nama }}</p>
-                <p class="text-[10px] text-slate-500">ID Pegawai: {{ Auth::user()->username }}</p>
+                <p class="text-[10px] text-slate-500">NIP / ID: {{ Auth::user()->username }}</p>
             </div>
         </div>
 
