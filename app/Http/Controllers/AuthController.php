@@ -30,15 +30,15 @@ class AuthController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ], [
-            'username.required' => 'Username wajib diisi.',
+            'username.required' => 'NIS wajib diisi.',
             'password.required' => 'Password wajib diisi.',
         ]);
 
-        // 2. Cek apakah username terdaftar di sistem
+        // 2. Cek apakah username / NIS terdaftar di sistem
         $user = User::where('username', $credentials['username'])->first();
         if (!$user) {
             return back()->withInput($request->only('username'))->withErrors([
-                'username' => 'Username tidak terdaftar di sistem.',
+                'username' => 'NIS tidak terdaftar di sistem.',
             ]);
         }
 
