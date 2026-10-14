@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Kepsek\KepsekDashboardController;
 use App\Http\Controllers\Teller\TellerDashboardController;
 use App\Http\Controllers\Siswa\SiswaDashboardController;
+use App\Http\Controllers\PaymentGatewayController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect root ke login
@@ -36,3 +37,10 @@ Route::middleware(['auth', 'role:teller'])->prefix('teller')->name('teller.')->g
 Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->group(function () {
     Route::get('/dashboard', [SiswaDashboardController::class, 'index'])->name('dashboard');
 });
+
+// Simulasi Payment Gateway & Callback Webhook (Poin G, H, I Dokumen Soal)
+Route::get('/simulator-payment', [PaymentGatewayController::class, 'simulator'])->name('payment.simulator');
+Route::get('/payment-gateway/transactions', [PaymentGatewayController::class, 'getTransactions'])->name('payment.transactions');
+Route::post('/payment-gateway/inquiry', [PaymentGatewayController::class, 'inquiry'])->name('payment.inquiry');
+Route::post('/payment-gateway/callback', [PaymentGatewayController::class, 'callback'])->name('payment.callback');
+

@@ -38,7 +38,8 @@
                 <span class="text-xs font-semibold text-indigo-600">Sistem Informasi Pembayaran SPP</span>
             </div>
 
-            <!-- Right Header: User Profile Dropdown Menu (Revisi: Digabung di ikon/foto pojok kanan atas) -->
+            <!-- Right Header: User Profile Dropdown Menu or Guest Login -->
+            @if(Auth::check())
             <div class="relative" x-data="{ open: false }">
                 <button type="button" 
                         @click="open = !open" 
@@ -140,6 +141,12 @@
                     </div>
                 </div>
             </div>
+            @else
+            <a href="{{ route('login') }}" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-2">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <span>Masuk ke Akun</span>
+            </a>
+            @endif
         </header>
 
         <!-- Flash Notifications -->

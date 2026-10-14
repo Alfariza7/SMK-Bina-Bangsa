@@ -77,6 +77,18 @@
                 <i class="fa-solid fa-circle-info text-indigo-500 mr-1"></i>
                 Lakukan transfer ke <strong>Nomor Virtual Account</strong> di atas. Status tagihan akan otomatis berubah menjadi <strong>LUNAS</strong> setelah transaksi dikonfirmasi oleh Payment Gateway.
             </div>
+
+            @if(($tagihanBulanIni->status ?? 'BELUM BAYAR') !== 'LUNAS')
+                <a href="{{ route('payment.simulator', ['va' => $siswa->virtualAccount->nomor_va ?? '']) }}" class="mt-4 w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md shadow-indigo-600/20">
+                    <i class="fa-solid fa-bolt text-amber-300"></i>
+                    <span>Bayar via Simulator Payment Gateway &rarr;</span>
+                </a>
+            @else
+                <div class="mt-4 p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700 text-xs font-semibold flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                    <span>Tagihan bulan ini telah Lunas Terverifikasi</span>
+                </div>
+            @endif
         </div>
 
         <!-- Total Tunggakan (Poin P) -->
