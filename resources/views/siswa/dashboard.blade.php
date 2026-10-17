@@ -180,13 +180,19 @@
     </div>
 
     <!-- Riwayat Pembayaran (Poin P) -->
-    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
-        <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+    <div id="riwayat-pembayaran" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden scroll-mt-6">
+        <div class="p-5 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3">
             <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
                 <i class="fa-solid fa-clock-rotate-left text-indigo-600"></i>
                 <span>RIWAYAT PEMBAYARAN SPP</span>
             </h2>
-            <span class="text-xs text-slate-400">Seluruh Periode</span>
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-slate-400">Seluruh Periode</span>
+                <a href="{{ route('siswa.riwayat') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold transition">
+                    <span>Halaman Riwayat Lengkap</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-left text-xs">

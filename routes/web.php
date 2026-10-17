@@ -48,6 +48,7 @@ Route::middleware(['auth', 'role:teller'])->prefix('teller')->name('teller.')->g
 // Group Role: SISWA
 Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->group(function () {
     Route::get('/dashboard', [SiswaDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/riwayat', [SiswaDashboardController::class, 'riwayat'])->name('riwayat');
 });
 
 // Master Data Siswa (Dapat diakses Admin, Kepala Sekolah, dan Teller)

@@ -33,6 +33,10 @@
     } elseif ($currentRoute === 'siswa.dashboard') {
         $currentPage = 'Tagihan & Profil Saya';
         $currentIcon = 'fa-solid fa-wallet';
+    } elseif ($currentRoute === 'siswa.riwayat') {
+        $category = 'Histori';
+        $currentPage = 'Riwayat Pembayaran';
+        $currentIcon = 'fa-solid fa-clock-rotate-left';
     } elseif ($currentRoute === 'admin.users.index') {
         $category = 'Master Data';
         $currentPage = 'Data Pengguna';

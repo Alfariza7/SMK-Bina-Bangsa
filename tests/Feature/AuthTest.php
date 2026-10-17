@@ -86,6 +86,29 @@ class AuthTest extends TestCase
     }
 
     /**
+     * Uji halaman riwayat pembayaran siswa (Poin O & P)
+     */
+    public function test_siswa_can_view_riwayat_pembayaran_page(): void
+    {
+        $user = User::where('username', '10101')->first();
+        $response = $this->actingAs($user)->get('/siswa/riwayat');
+
+        $response->assertStatus(200);
+        $response->assertSee('Riwayat Pembayaran SPP Siswa');
+        $response->assertSee('Indah Permatasari');
+        $response->assertSee('10101');
+    }
+
+    /**
+     * Uji tamu tidak dapat mengakses riwayat siswa
+     */
+    public function test_guest_cannot_access_siswa_riwayat(): void
+    {
+        $response = $this->get('/siswa/riwayat');
+        $response->assertRedirect('/login');
+    }
+
+    /**
      * Uji logout fungsional
      */
     public function test_user_can_logout(): void

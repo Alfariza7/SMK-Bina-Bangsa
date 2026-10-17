@@ -47,4 +47,33 @@ class SiswaDashboardController extends Controller
             'riwayatTagihan'
         ));
     }
+
+    public function riwayat()
+    {
+        $user = Auth::user();
+        $siswa = Siswa::with(['kelas.jurusan', 'tahunAjaran', 'virtualAccount'])
+            ->where('id_user', $user->id_user)
+            ->first();
+
+        if (!$siswa) {
+            abort(404, 'Data siswa untuk akun ini belum dihubungkan.');
+        }
+
+        $riwayatTagihan = TagihanSpp::with('pembayaran.transaksiPaymentGateway')
+            ->where('id_siswa', $siswa->id_siswa)
+            ->orderBy('id_tagihan', 'desc')
+            ->get();
+
+        $totalLunas = $riwayatTagihan->where('status', 'LUNAS')->sum('nominal');
+        $totalTunggakan = $riwayatTagihan->where('status', 'TUNGGAKAN')->sum('nominal');
+        $totalBelumBayar = $riwayatTagihan->where('status', 'BELUM BAYAR')->sum('nominal');
+
+        return view('siswa.riwayat', compact(
+            'siswa',
+            'riwayatTagihan',
+            'totalLunas',
+            'totalTunggakan',
+            'totalBelumBayar'
+        ));
+    }
 }
