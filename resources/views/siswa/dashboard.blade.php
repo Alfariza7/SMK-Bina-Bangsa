@@ -4,40 +4,66 @@
 
 @section('content')
 <div class="max-w-4xl mx-auto space-y-6">
-    <!-- Header Selamat Datang (Poin P) -->
-    <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
-        <div class="absolute right-0 top-0 translate-x-10 -translate-y-10 w-64 h-64 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+    <!-- Header Selamat Datang & Profil Siswa Lengkap (Poin a & b Panduan LSP) -->
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-indigo-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-indigo-500/20">
+        <div class="absolute right-0 top-0 translate-x-12 -translate-y-12 w-80 h-80 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-            <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-indigo-300">PORTAL PEMBAYARAN SISWA</span>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">{{ $siswa->nama }}</h1>
-                <div class="flex items-center gap-2 mt-2 text-xs sm:text-sm text-indigo-200">
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 font-semibold text-white">
-                        <i class="fa-solid fa-graduation-cap text-indigo-300"></i>
-                        <span>{{ $siswa->kelas->nama_kelas ?? '-' }}</span>
-                    </span>
-                    <span class="text-indigo-400">•</span>
-                    <span class="font-mono text-indigo-200">
-                        NIS: <strong class="text-white">{{ $siswa->nis }}</strong>
-                    </span>
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <!-- Profil Siswa: Nama, Kelas, Jurusan, NIS, NISN, Tahun Ajaran -->
+            <div class="space-y-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold mb-2">
+                        <i class="fa-solid fa-id-card"></i>
+                        <span>Portal Pembayaran Siswa</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                        {{ $siswa->nama }}
+                    </h1>
+                    <p class="text-xs sm:text-sm text-indigo-200 mt-1 flex items-center gap-2">
+                        <span class="font-bold text-white">{{ $siswa->kelas->nama_kelas ?? '-' }}</span>
+                        <span>•</span>
+                        <span>{{ $siswa->kelas->jurusan->nama_jurusan ?? '-' }}</span>
+                    </p>
+                </div>
+
+                <!-- Grid Data Atribut Siswa (Poin a: NIS, NISN, Kelas, Tahun Ajaran) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1 text-xs">
+                    <div class="bg-white/10 backdrop-blur-sm px-3.5 py-2.5 rounded-xl border border-white/10">
+                        <span class="text-[10px] text-indigo-300 font-semibold uppercase tracking-wider block">NIS</span>
+                        <span class="font-mono font-bold text-white text-sm">{{ $siswa->nis }}</span>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-sm px-3.5 py-2.5 rounded-xl border border-white/10">
+                        <span class="text-[10px] text-indigo-300 font-semibold uppercase tracking-wider block">NISN</span>
+                        <span class="font-mono font-bold text-white text-sm">{{ $siswa->nisn ?? '-' }}</span>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-sm px-3.5 py-2.5 rounded-xl border border-white/10">
+                        <span class="text-[10px] text-indigo-300 font-semibold uppercase tracking-wider block">Kelas</span>
+                        <span class="font-bold text-white text-sm">{{ $siswa->kelas->nama_kelas ?? '-' }}</span>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-sm px-3.5 py-2.5 rounded-xl border border-white/10">
+                        <span class="text-[10px] text-indigo-300 font-semibold uppercase tracking-wider block">Tahun Ajaran</span>
+                        <span class="font-bold text-white text-sm">{{ $siswa->tahunAjaran->tahun_ajaran ?? '2026/2027' }}</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Virtual Account Display Card (Poin P & F) -->
-            <div class="bg-white/10 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-white/20 text-right shrink-0">
+            <!-- Virtual Account Display Card (Poin b: VA Milik Masing-Masing Murid) -->
+            <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 text-center lg:text-right shrink-0">
                 <span class="text-[11px] font-semibold uppercase tracking-wider text-indigo-200 block">
                     VIRTUAL ACCOUNT SAYA
                 </span>
-                <div class="mt-1 flex items-center justify-end gap-2">
-                    <span id="va-number" class="text-xl sm:text-2xl font-mono font-black text-amber-300 tracking-wider">
+                <div class="mt-1.5 flex items-center justify-center lg:justify-end gap-2">
+                    <span id="va-number" class="text-2xl sm:text-3xl font-mono font-black text-amber-300 tracking-wider">
                         {{ $siswa->virtualAccount->nomor_va ?? 'Belum ada' }}
                     </span>
-                    <button type="button" onclick="copyVA()" title="Salin Nomor VA" class="p-1.5 text-indigo-200 hover:text-white transition">
-                        <i class="fa-regular fa-copy"></i>
+                    <button type="button" onclick="copyVA()" title="Salin Nomor VA" class="p-1.5 text-indigo-200 hover:text-white transition cursor-pointer">
+                        <i class="fa-regular fa-copy text-lg"></i>
                     </button>
                 </div>
-                <p class="text-[10px] text-indigo-300 mt-1">
+                <p class="text-[11px] text-indigo-200 mt-1">
                     *5 digit terakhir VA sama dengan NIS: <span class="font-mono font-bold text-white">{{ $siswa->nis }}</span>
                 </p>
             </div>
@@ -153,6 +179,7 @@
                         <th class="py-3 px-5">Bulan & Tahun</th>
                         <th class="py-3 px-5">Nominal</th>
                         <th class="py-3 px-5">Jatuh Tempo</th>
+                        <th class="py-3 px-5">Tanggal Pembayaran</th>
                         <th class="py-3 px-5">Status</th>
                         <th class="py-3 px-5 text-center">Bukti Bayar</th>
                     </tr>
@@ -168,6 +195,16 @@
                             </td>
                             <td class="py-3.5 px-5 text-slate-500">
                                 {{ \Carbon\Carbon::parse($item->tanggal_jatuh_tempo)->format('d F Y') }}
+                            </td>
+                            <td class="py-3.5 px-5">
+                                @if($item->status === 'LUNAS' && $item->pembayaran && $item->pembayaran->tanggal_pembayaran)
+                                    <span class="text-emerald-700 font-medium inline-flex items-center gap-1.5">
+                                        <i class="fa-solid fa-circle-check text-[10px] text-emerald-500"></i>
+                                        <span>{{ \Carbon\Carbon::parse($item->pembayaran->tanggal_pembayaran)->format('d F Y') }}</span>
+                                    </span>
+                                @else
+                                    <span class="text-slate-400 font-mono text-[11px]">-</span>
+                                @endif
                             </td>
                             <td class="py-3.5 px-5">
                                 <span class="px-3 py-1 rounded-full text-[10px] font-bold
@@ -192,7 +229,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="py-6 text-center text-slate-400">
+                            <td colspan="6" class="py-6 text-center text-slate-400">
                                 Belum ada data riwayat tagihan.
                             </td>
                         </tr>
@@ -200,6 +237,17 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <!-- Catatan Hak Akses Siswa Terproteksi (Poin f Panduan LSP) -->
+    <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200/70 text-slate-500 text-[11px] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-indigo-500 text-sm"></i>
+            <span><strong>Catatan Keamanan Siswa:</strong> Seluruh riwayat transaksi bersifat permanen (read-only) dan diverifikasi otomatis oleh callback Payment Gateway perbankan.</span>
+        </div>
+        <span class="inline-flex items-center gap-1 text-[10px] bg-slate-200/60 text-slate-600 px-2.5 py-1 rounded-full font-semibold shrink-0">
+            <i class="fa-solid fa-lock text-[9px]"></i> Read-Only Mode
+        </span>
     </div>
 </div>
 
