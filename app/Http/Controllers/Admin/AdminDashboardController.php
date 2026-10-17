@@ -19,6 +19,7 @@ class AdminDashboardController extends Controller
         $totalPembayaran = Pembayaran::sum('nominal_pembayaran');
         $totalTunggakan = TagihanSpp::where('status', 'TUNGGAKAN')->sum('nominal');
         $totalSiswaMenunggak = TagihanSpp::where('status', 'TUNGGAKAN')->distinct('id_siswa')->count('id_siswa');
+        $totalTransaksi = TransaksiPaymentGateway::count();
         $transaksiHariIni = TransaksiPaymentGateway::whereDate('tanggal_transaksi', Carbon::today())->count();
         $transaksiTerbaru = TransaksiPaymentGateway::with('siswa')->latest()->take(5)->get();
 
@@ -42,6 +43,7 @@ class AdminDashboardController extends Controller
             'totalPembayaran',
             'totalTunggakan',
             'totalSiswaMenunggak',
+            'totalTransaksi',
             'transaksiHariIni',
             'transaksiTerbaru',
             'penerimaanPerBulan',

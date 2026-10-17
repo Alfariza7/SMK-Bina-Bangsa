@@ -5,15 +5,15 @@
 </a>
 
 <div class="pt-4 pb-1 px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">Monitoring & Laporan</div>
-<a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
+<a href="{{ route('master.siswa.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl {{ request()->routeIs('master.siswa.*') ? 'bg-amber-600 text-white shadow-md shadow-amber-600/25' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 transition' }}">
     <i class="fa-solid fa-user-graduate w-4 text-center"></i>
     <span>Data Siswa</span>
 </a>
-<a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
+<a href="{{ route('tagihan.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl {{ request()->routeIs('tagihan.*') ? 'bg-amber-600 text-white shadow-md shadow-amber-600/25' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 transition' }}">
     <i class="fa-solid fa-receipt w-4 text-center"></i>
     <span>Monitoring Tagihan</span>
 </a>
-<a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition">
+<a href="{{ route('transaksi.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl {{ request()->routeIs('transaksi.*') ? 'bg-amber-600 text-white shadow-md shadow-amber-600/25' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 transition' }}">
     <i class="fa-solid fa-clock-rotate-left w-4 text-center"></i>
     <span>Monitoring Transaksi</span>
 </a>

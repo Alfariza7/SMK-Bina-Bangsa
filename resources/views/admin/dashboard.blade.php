@@ -72,17 +72,22 @@
             </h3>
         </div>
 
-        <!-- Transaksi Hari Ini -->
+        <!-- Total Transaksi -->
         <div class="bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-semibold text-slate-500">Transaksi Hari Ini</span>
+                <span class="text-xs font-semibold text-slate-500">Total Transaksi</span>
                 <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-sm shrink-0">
-                    <i class="fa-solid fa-bolt"></i>
+                    <i class="fa-solid fa-receipt"></i>
                 </div>
             </div>
-            <h3 class="text-xl font-black text-slate-800 tracking-tight whitespace-nowrap">
-                {{ number_format($transaksiHariIni) }} <span class="text-xs font-semibold text-slate-400">Trx</span>
-            </h3>
+            <div>
+                <h3 class="text-xl font-black text-slate-800 tracking-tight whitespace-nowrap">
+                    {{ number_format($totalTransaksi) }} <span class="text-xs font-semibold text-slate-400">Trx</span>
+                </h3>
+                <span class="text-[10px] text-amber-600 font-semibold block mt-0.5">
+                    +{{ number_format($transaksiHariIni) }} Transaksi Hari Ini
+                </span>
+            </div>
         </div>
     </div>
 
