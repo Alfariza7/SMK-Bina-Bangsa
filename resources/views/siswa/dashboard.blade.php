@@ -51,21 +51,37 @@
             </div>
 
             <!-- Virtual Account Display Card (Poin b: VA Milik Masing-Masing Murid) -->
-            <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 text-center lg:text-right shrink-0">
-                <span class="text-[11px] font-semibold uppercase tracking-wider text-indigo-200 block">
-                    VIRTUAL ACCOUNT SAYA
-                </span>
-                <div class="mt-1.5 flex items-center justify-center lg:justify-end gap-2">
-                    <span id="va-number" class="text-2xl sm:text-3xl font-mono font-black text-amber-300 tracking-wider">
-                        {{ $siswa->virtualAccount->nomor_va ?? 'Belum ada' }}
+            <div class="bg-gradient-to-br from-white/[0.12] to-white/[0.04] backdrop-blur-md p-5 rounded-2xl border border-white/20 shadow-lg flex flex-col justify-between shrink-0 lg:w-80">
+                <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                    <div class="flex items-center gap-2">
+                        <div class="w-7 h-7 rounded-lg bg-indigo-500/25 border border-indigo-400/30 flex items-center justify-center text-indigo-300">
+                            <i class="fa-solid fa-wallet text-xs"></i>
+                        </div>
+                        <span class="text-xs font-bold text-white tracking-wide">Virtual Account Saya</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-[10px] font-semibold text-emerald-300 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Aktif
                     </span>
-                    <button type="button" onclick="copyVA()" title="Salin Nomor VA" class="p-1.5 text-indigo-200 hover:text-white transition cursor-pointer">
-                        <i class="fa-regular fa-copy text-lg"></i>
-                    </button>
                 </div>
-                <p class="text-[11px] text-indigo-200 mt-1">
-                    *5 digit terakhir VA sama dengan NIS: <span class="font-mono font-bold text-white">{{ $siswa->nis }}</span>
-                </p>
+
+                <div class="my-3">
+                    <span class="text-[10px] font-medium uppercase tracking-wider text-indigo-200/80 block mb-1.5">Nomor Rekening Pembayaran</span>
+                    <div class="flex items-center justify-between gap-2 bg-black/30 px-3.5 py-2.5 rounded-xl border border-white/10">
+                        <span id="va-number" class="text-lg sm:text-xl font-mono font-bold text-white tracking-widest selection:bg-indigo-500">
+                            {{ $siswa->virtualAccount->nomor_va ?? 'Belum ada' }}
+                        </span>
+                        <button type="button" id="copy-btn" onclick="copyVA()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white rounded-lg text-xs font-semibold transition cursor-pointer shrink-0 shadow-sm">
+                            <i class="fa-regular fa-copy text-xs" id="copy-icon"></i>
+                            <span id="copy-text">Salin</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pt-2 text-[11px] text-indigo-200/80 flex items-center justify-between">
+                    <span class="text-[10px] text-slate-300">Bank Transfer / Finnet</span>
+                    <span class="text-[10px] text-indigo-300 font-medium">ATM • M-Banking</span>
+                </div>
             </div>
         </div>
     </div>
@@ -253,9 +269,28 @@
 
 <script>
     function copyVA() {
-        const va = document.getElementById('va-number').innerText.trim();
+        const vaElement = document.getElementById('va-number');
+        if (!vaElement) return;
+        const va = vaElement.innerText.trim();
+
         navigator.clipboard.writeText(va).then(() => {
-            alert('Nomor Virtual Account disalin: ' + va);
+            const btn = document.getElementById('copy-btn');
+            const icon = document.getElementById('copy-icon');
+            const text = document.getElementById('copy-text');
+
+            if (btn && icon && text) {
+                btn.classList.remove('bg-indigo-600', 'hover:bg-indigo-500');
+                btn.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+                icon.className = 'fa-solid fa-check text-xs';
+                text.innerText = 'Tersalin!';
+
+                setTimeout(() => {
+                    btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+                    btn.classList.add('bg-indigo-600', 'hover:bg-indigo-500');
+                    icon.className = 'fa-regular fa-copy text-xs';
+                    text.innerText = 'Salin';
+                }, 2000);
+            }
         });
     }
 </script>
