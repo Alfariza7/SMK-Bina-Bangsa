@@ -32,54 +32,47 @@
             <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#131129] via-[#131129]/85 to-transparent pointer-events-none"></div>
         </div>
 
-        <!-- 3. Informasi Layanan Sekolah & Program Keahlian (Desain Cardless & Terbuka) -->
-        <div class="relative z-10 px-8 sm:px-12 pb-8 pt-1 max-w-xl mx-auto w-full my-auto space-y-5">
-            <!-- Tajuk Portal Resmi -->
-            <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-semibold mb-2.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>Portal Resmi Pembayaran SPP Online</span>
+        <!-- 3. Headline & Keunggulan Sistem (Rata Tengah & Pas di Layar) -->
+        <div class="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center w-full px-6 sm:px-10 pb-6 pt-0 my-auto">
+            
+            <!-- Headline Utama (Tanpa Redundansi Nama Sekolah) -->
+            <h1 class="text-2xl sm:text-3xl font-black text-white leading-tight tracking-tight">
+                Bayar SPP Lebih Praktis <br class="hidden sm:inline">
+                dengan <span class="text-2xl sm:text-3xl font-black text-white leading-tight tracking-tight">Virtual Account</span>
+            </h1>
+
+            <!-- Subtitle Paragraf (Lebar Rapi Tanpa Orphan Word) -->
+            <p class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm mx-auto" style="text-wrap: balance;">
+                Tidak perlu antre dan tanpa konfirmasi manual. Setiap siswa memiliki nomor Virtual Account unik yang terhubung langsung ke sistem verifikasi otomatis.
+            </p>
+
+            <!-- 3 Poin Keunggulan (Bahasa Pengguna, Bukan Istilah Teknis Developer) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full mt-5 text-left">
+                <div class="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <div class="text-indigo-400 text-sm mb-1">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h4 class="text-xs font-bold text-white">Verifikasi Kilat</h4>
+                    <p class="text-[10px] text-slate-300 mt-0.5 leading-snug">Status lunas otomatis detik itu juga</p>
                 </div>
-                <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
-                    Sistem Pembayaran Cepat & Terverifikasi Otomatis
-                </h1>
-                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
-                    Setiap siswa memiliki nomor Virtual Account unik untuk mempermudah transaksi secara mandiri tanpa perlu antre di sekolah.
-                </p>
+
+                <div class="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <div class="text-emerald-400 text-sm mb-1">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h4 class="text-xs font-bold text-white">Data Transparan</h4>
+                    <p class="text-[10px] text-slate-300 mt-0.5 leading-snug">Histori pembayaran tercatat resmi</p>
+                </div>
+
+                <div class="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <div class="text-amber-400 text-sm mb-1">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <h4 class="text-xs font-bold text-white">Jatuh Tempo</h4>
+                    <p class="text-[10px] text-slate-300 mt-0.5 leading-snug">Otomatis deteksi tunggakan</p>
+                </div>
             </div>
 
-            <!-- Daftar 3 Program Keahlian (Identitas Sekolah) -->
-            <div class="pt-4 border-t border-white/10">
-                <span class="text-[10px] font-bold text-indigo-300 uppercase tracking-wider block mb-2.5">
-                    Program Keahlian Terdaftar
-                </span>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <div class="p-2.5 rounded-xl bg-white/[0.04] border border-white/10">
-                        <span class="font-mono font-bold text-blue-400 text-xs block">RPL</span>
-                        <span class="text-[10px] text-slate-300 block leading-tight mt-0.5">Rekayasa Perangkat Lunak</span>
-                    </div>
-                    <div class="p-2.5 rounded-xl bg-white/[0.04] border border-white/10">
-                        <span class="font-mono font-bold text-purple-400 text-xs block">DKV</span>
-                        <span class="text-[10px] text-slate-300 block leading-tight mt-0.5">Desain Komunikasi Visual</span>
-                    </div>
-                    <div class="p-2.5 rounded-xl bg-white/[0.04] border border-white/10">
-                        <span class="font-mono font-bold text-emerald-400 text-xs block">TKJ</span>
-                        <span class="text-[10px] text-slate-300 block leading-tight mt-0.5">Teknik Komputer Jaringan</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Keterangan Operasional Sekolah -->
-            <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-300">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-building-columns text-indigo-400 text-sm shrink-0"></i>
-                    <span class="text-[11px] leading-tight">Transfer via ATM, M-Banking, dan E-Wallet 24 Jam</span>
-                </div>
-                <div class="flex items-center gap-1.5 text-slate-400 text-[11px]">
-                    <i class="fa-solid fa-headset text-slate-400 text-xs"></i>
-                    <span>Bantuan TU: Hari Kerja 07.30 - 15.30</span>
-                </div>
-            </div>
         </div>
 
         <!-- Spacer Bawah -->

@@ -30,12 +30,9 @@
     <div class="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden">
         <!-- Top Navbar -->
         <header class="h-16 bg-white border-b border-slate-200/80 px-6 flex items-center justify-between sticky top-0 z-30 shadow-sm/50">
-            <!-- Left Header: Breadcrumb info (Revisi: Tanpa tulisan sistem uji kompetensi siswa) -->
-            <div class="flex items-center gap-2.5">
-                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                <span class="text-xs font-bold text-slate-800 tracking-tight">SMK BINA BANGSA</span>
-                <span class="text-xs text-slate-300">/</span>
-                <span class="text-xs font-semibold text-indigo-600">Sistem Informasi Pembayaran SPP</span>
+            <!-- Left Header: Breadcrumbs Terstruktur & Modern (Sesuai Dribbble Reference) -->
+            <div class="flex items-center overflow-hidden">
+                @include('components.breadcrumbs')
             </div>
 
             <!-- Right Header: User Profile Dropdown Menu or Guest Login -->
