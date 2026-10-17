@@ -55,7 +55,10 @@
                     <!-- User Name & Role Text -->
                     <div class="text-left hidden sm:block">
                         <p class="text-xs font-bold text-slate-800 leading-tight">{{ Auth::user()->nama }}</p>
-                        <p class="text-[10px] text-slate-400 capitalize">{{ str_replace('_', ' ', Auth::user()->role) }}</p>
+                        <p class="text-[10px] text-slate-400 capitalize">
+                            <i class="fa fa-user-graduate"></i>
+                            <span class="ml-1">{{ str_replace('_', ' ', Auth::user()->role) }}</span>
+                        </p>
                     </div>
 
                     <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200" :class="open ? 'rotate-180' : ''"></i>
@@ -91,45 +94,8 @@
                         </div>
                     </div>
 
-                    <!-- Details List (List Informasi Akun) -->
-                    <div class="py-3.5 space-y-2.5 text-xs">
-                        <div class="flex items-center justify-between p-2 bg-slate-50 rounded-xl">
-                            <span class="text-slate-500 font-medium flex items-center gap-2">
-                                <i class="fa-solid fa-id-card text-indigo-500"></i>
-                                <span>{{ Auth::user()->role === 'siswa' ? 'NIS Siswa' : 'Username' }}</span>
-                            </span>
-                            <span class="font-mono font-bold text-slate-800">{{ Auth::user()->username }}</span>
-                        </div>
-
-                        <div class="flex items-center justify-between p-2 bg-slate-50 rounded-xl">
-                            <span class="text-slate-500 font-medium flex items-center gap-2">
-                                <i class="fa-solid fa-circle-check text-emerald-500"></i>
-                                <span>Status Akun</span>
-                            </span>
-                            <span class="font-bold text-emerald-600 capitalize">{{ Auth::user()->status }}</span>
-                        </div>
-
-                        @if(Auth::user()->role === 'siswa' && Auth::user()->siswa)
-                            <div class="flex items-center justify-between p-2 bg-slate-50 rounded-xl">
-                                <span class="text-slate-500 font-medium flex items-center gap-2">
-                                    <i class="fa-solid fa-school text-indigo-500"></i>
-                                    <span>Kelas</span>
-                                </span>
-                                <span class="font-bold text-slate-800">{{ Auth::user()->siswa->kelas->nama_kelas ?? '-' }}</span>
-                            </div>
-
-                            <div class="flex items-center justify-between p-2 bg-indigo-50/70 border border-indigo-100 rounded-xl">
-                                <span class="text-indigo-700 font-medium flex items-center gap-2">
-                                    <i class="fa-solid fa-credit-card text-indigo-600"></i>
-                                    <span>Virtual Account</span>
-                                </span>
-                                <span class="font-mono font-bold text-indigo-800">{{ Auth::user()->siswa->virtualAccount->nomor_va ?? '-' }}</span>
-                            </div>
-                        @endif
-                    </div>
-
-                    <!-- Divider & Logout Button (Revisi: Logout ada di bawah list informasi di dropdown) -->
-                    <div class="pt-3 border-t border-slate-100">
+                    <!-- Divider & Logout Button -->
+                    <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" 

@@ -12,21 +12,14 @@
             <div>
                 <span class="text-xs font-bold uppercase tracking-wider text-indigo-300">PORTAL PEMBAYARAN SISWA</span>
                 <h1 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">{{ $siswa->nama }}</h1>
-                <div class="flex flex-wrap items-center gap-2 mt-3 text-xs text-indigo-200">
-                    <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30 font-mono">
-                        NIS: <strong>{{ $siswa->nis }}</strong>
+                <div class="flex items-center gap-2 mt-2 text-xs sm:text-sm text-indigo-200">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 font-semibold text-white">
+                        <i class="fa-solid fa-graduation-cap text-indigo-300"></i>
+                        <span>{{ $siswa->kelas->nama_kelas ?? '-' }}</span>
                     </span>
-                    <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30 font-mono">
-                        NISN: <strong>{{ $siswa->nisn ?? '0089123456' }}</strong>
-                    </span>
-                    <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30">
-                        Kelas: <strong>{{ $siswa->kelas->nama_kelas ?? '-' }}</strong>
-                    </span>
-                    <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30">
-                        Jurusan: <strong>{{ $siswa->kelas->jurusan->nama_jurusan ?? '-' }}</strong>
-                    </span>
-                    <span class="bg-indigo-700/60 px-3 py-1 rounded-lg border border-indigo-500/30">
-                        T.A: <strong>{{ $siswa->tahunAjaran->tahun_ajaran ?? '2026/2027' }}</strong>
+                    <span class="text-indigo-400">•</span>
+                    <span class="font-mono text-indigo-200">
+                        NIS: <strong class="text-white">{{ $siswa->nis }}</strong>
                     </span>
                 </div>
             </div>

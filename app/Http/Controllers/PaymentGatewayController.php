@@ -148,13 +148,13 @@ class PaymentGatewayController extends Controller
     }
 
     /**
-     * Reset Tagihan Demo untuk Siswa Ahmad Fauzan (NIS: 12345)
+     * Reset Tagihan Demo untuk Siswa Indah Permatasari (NIS: 12345 - 10 RPL)
      */
     public function resetDemo()
     {
         $siswa = Siswa::where('nis', '12345')->first();
         if (!$siswa) {
-            return response()->json(['success' => false, 'message' => 'Siswa Ahmad Fauzan tidak ditemukan.'], 404);
+            return response()->json(['success' => false, 'message' => 'Siswa demo Indah Permatasari tidak ditemukan.'], 404);
         }
 
         // Cari atau buat tagihan September 2026
@@ -172,12 +172,12 @@ class PaymentGatewayController extends Controller
         // Hapus pembayaran terkait tagihan September 2026
         Pembayaran::where('id_tagihan', $tagihanSept->id_tagihan)->delete();
 
-        // Hapus transaksi payment gateway dummy Ahmad Fauzan agar transaction_id bisa diuji ulang
+        // Hapus transaksi payment gateway dummy Indah Permatasari agar transaction_id bisa diuji ulang
         TransaksiPaymentGateway::where('id_siswa', $siswa->id_siswa)->delete();
 
         return response()->json([
             'success' => true,
-            'message' => 'Tagihan demo Ahmad Fauzan (September 2026 - Rp 350.000) berhasil direset ke status BELUM BAYAR!',
+            'message' => 'Tagihan demo Indah Permatasari (September 2026 - Rp 350.000) berhasil direset ke status BELUM BAYAR!',
             'data' => [
                 'nis' => $siswa->nis,
                 'nama' => $siswa->nama,

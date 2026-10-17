@@ -108,7 +108,7 @@ class PaymentGatewayTest extends TestCase
                 'virtual_account' => '8800012345',
                 'siswa' => [
                     'nis' => '12345',
-                    'nama' => 'Ahmad Fauzan',
+                    'nama' => $this->siswa->nama,
                 ],
             ],
         ]);

@@ -24,14 +24,14 @@
                 <!-- Tombol Reset Demo LSP -->
                 <div class="mt-4 flex flex-wrap items-center gap-2">
                     <button type="button" 
-                            @click="resetAhmadFauzanDemo()" 
+                            @click="resetDemo()" 
                             :disabled="loadingReset"
                             class="inline-flex items-center gap-2 px-3.5 py-2 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 hover:text-white rounded-xl text-xs font-bold transition cursor-pointer">
                         <i class="fa-solid fa-rotate-left" :class="loadingReset ? 'animate-spin' : ''"></i>
-                        <span>Reset Tagihan Demo (Ahmad Fauzan)</span>
+                        <span>Reset Tagihan Demo (Indah - 10 RPL)</span>
                     </button>
                     <span class="text-[11px] text-slate-400">
-                        *Kembalikan tagihan Sept 2026 Ahmad Fauzan ke status BELUM BAYAR (Rp 350.000)
+                        *Kembalikan tagihan Sept 2026 Indah Permatasari ke status BELUM BAYAR (Rp 350.000)
                     </span>
                 </div>
             </div>
@@ -692,7 +692,7 @@ function paymentSimulator() {
             }
         },
 
-        async resetAhmadFauzanDemo() {
+        async resetDemo() {
             this.loadingReset = true;
             this.errorMessage = '';
             this.paymentSuccessMessage = '';
@@ -721,6 +721,10 @@ function paymentSimulator() {
             } finally {
                 this.loadingReset = false;
             }
+        },
+
+        resetAhmadFauzanDemo() {
+            return this.resetDemo();
         },
 
         // Webhook Tester Functions
