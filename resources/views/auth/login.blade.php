@@ -32,54 +32,52 @@
             <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#131129] via-[#131129]/85 to-transparent pointer-events-none"></div>
         </div>
 
-        <!-- 3. Kartu Informasi & Alur Akses Siswa (Elegan, Kompak, & Senada dengan Branding) -->
-        <div class="relative z-10 max-w-lg mx-auto w-full px-6 sm:px-10 pb-6 pt-2 my-auto">
-            <div class="bg-white/[0.06] backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/10 shadow-xl">
-                <!-- Header Kartu -->
-                <div class="flex items-center justify-between pb-3.5 border-b border-white/10">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300">
-                            <i class="fa-solid fa-graduation-cap text-sm"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xs font-bold text-white tracking-wide uppercase">Layanan SPP Virtual Account</h3>
-                            <p class="text-[11px] text-slate-300">Tahun Ajaran 2026/2027 • SMK Bina Bangsa</p>
-                        </div>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] font-semibold flex items-center gap-1.5 shrink-0">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        Sistem Aktif
-                    </span>
+        <!-- 3. Informasi Layanan Sekolah & Program Keahlian (Desain Cardless & Terbuka) -->
+        <div class="relative z-10 px-8 sm:px-12 pb-8 pt-1 max-w-xl mx-auto w-full my-auto space-y-5">
+            <!-- Tajuk Portal Resmi -->
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-semibold mb-2.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Portal Resmi Pembayaran SPP Online</span>
                 </div>
+                <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
+                    Sistem Pembayaran Cepat & Terverifikasi Otomatis
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                    Setiap siswa memiliki nomor Virtual Account unik untuk mempermudah transaksi secara mandiri tanpa perlu antre di sekolah.
+                </p>
+            </div>
 
-                <!-- 3 Langkah Alur Akses Siswa -->
-                <div class="grid grid-cols-3 gap-2.5 my-4">
-                    <div class="bg-white/5 p-3 rounded-xl border border-white/5 text-center">
-                        <div class="w-6 h-6 mx-auto mb-1.5 rounded-lg bg-indigo-600/40 border border-indigo-400/30 text-indigo-200 font-mono font-bold text-xs flex items-center justify-center">1</div>
-                        <p class="text-xs font-bold text-white">Login Siswa</p>
-                        <p class="text-[10px] text-slate-300 mt-0.5 leading-tight">Gunakan NIS & password</p>
+            <!-- Daftar 3 Program Keahlian (Identitas Sekolah) -->
+            <div class="pt-4 border-t border-white/10">
+                <span class="text-[10px] font-bold text-indigo-300 uppercase tracking-wider block mb-2.5">
+                    Program Keahlian Terdaftar
+                </span>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <div class="p-2.5 rounded-xl bg-white/[0.04] border border-white/10">
+                        <span class="font-mono font-bold text-blue-400 text-xs block">RPL</span>
+                        <span class="text-[10px] text-slate-300 block leading-tight mt-0.5">Rekayasa Perangkat Lunak</span>
                     </div>
-
-                    <div class="bg-white/5 p-3 rounded-xl border border-white/5 text-center">
-                        <div class="w-6 h-6 mx-auto mb-1.5 rounded-lg bg-indigo-600/40 border border-indigo-400/30 text-indigo-200 font-mono font-bold text-xs flex items-center justify-center">2</div>
-                        <p class="text-xs font-bold text-white">Salin No. VA</p>
-                        <p class="text-[10px] text-slate-300 mt-0.5 leading-tight">Cek VA unik di dashboard</p>
+                    <div class="p-2.5 rounded-xl bg-white/[0.04] border border-white/10">
+                        <span class="font-mono font-bold text-purple-400 text-xs block">DKV</span>
+                        <span class="text-[10px] text-slate-300 block leading-tight mt-0.5">Desain Komunikasi Visual</span>
                     </div>
-
-                    <div class="bg-white/5 p-3 rounded-xl border border-white/5 text-center">
-                        <div class="w-6 h-6 mx-auto mb-1.5 rounded-lg bg-indigo-600/40 border border-indigo-400/30 text-indigo-200 font-mono font-bold text-xs flex items-center justify-center">3</div>
-                        <p class="text-xs font-bold text-white">Transfer</p>
-                        <p class="text-[10px] text-slate-300 mt-0.5 leading-tight">Otomatis lunas detik itu juga</p>
+                    <div class="p-2.5 rounded-xl bg-white/[0.04] border border-white/10">
+                        <span class="font-mono font-bold text-emerald-400 text-xs block">TKJ</span>
+                        <span class="text-[10px] text-slate-300 block leading-tight mt-0.5">Teknik Komputer Jaringan</span>
                     </div>
                 </div>
+            </div>
 
-                <!-- Footer Kartu -->
-                <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-300">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-shield-check text-cyan-400 text-xs"></i>
-                        <span>Kanal Pembayaran: ATM, M-Banking & E-Wallet</span>
-                    </div>
-                    <span class="text-[10px] text-indigo-300 font-medium">Tanpa Antre & Bebas Konfirmasi</span>
+            <!-- Keterangan Operasional Sekolah -->
+            <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-300">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-building-columns text-indigo-400 text-sm shrink-0"></i>
+                    <span class="text-[11px] leading-tight">Transfer via ATM, M-Banking, dan E-Wallet 24 Jam</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-slate-400 text-[11px]">
+                    <i class="fa-solid fa-headset text-slate-400 text-xs"></i>
+                    <span>Bantuan TU: Hari Kerja 07.30 - 15.30</span>
                 </div>
             </div>
         </div>
