@@ -32,47 +32,56 @@
             <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#131129] via-[#131129]/85 to-transparent pointer-events-none"></div>
         </div>
 
-        <!-- 3. Headline & Keunggulan Sistem (Rata Tengah & Pas di Layar) -->
-        <div class="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center w-full px-6 sm:px-10 pb-6 pt-0 my-auto">
-            
-            <!-- Headline Utama (Tanpa Redundansi Nama Sekolah) -->
-            <h1 class="text-2xl sm:text-3xl font-black text-white leading-tight tracking-tight">
-                Bayar SPP Lebih Praktis <br class="hidden sm:inline">
-                dengan <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-300 to-violet-400">Virtual Account</span>
-            </h1>
-
-            <!-- Subtitle Paragraf (Lebar Rapi Tanpa Orphan Word) -->
-            <p class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm mx-auto" style="text-wrap: balance;">
-                Tidak perlu antre dan tanpa konfirmasi manual. Setiap siswa memiliki nomor Virtual Account unik yang terhubung langsung ke sistem verifikasi otomatis.
-            </p>
-
-            <!-- 3 Poin Keunggulan (Bahasa Pengguna, Bukan Istilah Teknis Developer) -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full mt-5 text-left">
-                <div class="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                    <div class="text-indigo-400 text-sm mb-1">
-                        <i class="fa-solid fa-bolt"></i>
+        <!-- 3. Kartu Informasi & Alur Akses Siswa (Elegan, Kompak, & Senada dengan Branding) -->
+        <div class="relative z-10 max-w-lg mx-auto w-full px-6 sm:px-10 pb-6 pt-2 my-auto">
+            <div class="bg-white/[0.06] backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/10 shadow-xl">
+                <!-- Header Kartu -->
+                <div class="flex items-center justify-between pb-3.5 border-b border-white/10">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300">
+                            <i class="fa-solid fa-graduation-cap text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold text-white tracking-wide uppercase">Layanan SPP Virtual Account</h3>
+                            <p class="text-[11px] text-slate-300">Tahun Ajaran 2026/2027 • SMK Bina Bangsa</p>
+                        </div>
                     </div>
-                    <h4 class="text-xs font-bold text-white">Verifikasi Kilat</h4>
-                    <p class="text-[10px] text-slate-300 mt-0.5 leading-snug">Status lunas otomatis detik itu juga</p>
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] font-semibold flex items-center gap-1.5 shrink-0">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Sistem Aktif
+                    </span>
                 </div>
 
-                <div class="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                    <div class="text-emerald-400 text-sm mb-1">
-                        <i class="fa-solid fa-shield-halved"></i>
+                <!-- 3 Langkah Alur Akses Siswa -->
+                <div class="grid grid-cols-3 gap-2.5 my-4">
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/5 text-center">
+                        <div class="w-6 h-6 mx-auto mb-1.5 rounded-lg bg-indigo-600/40 border border-indigo-400/30 text-indigo-200 font-mono font-bold text-xs flex items-center justify-center">1</div>
+                        <p class="text-xs font-bold text-white">Login Siswa</p>
+                        <p class="text-[10px] text-slate-300 mt-0.5 leading-tight">Gunakan NIS & password</p>
                     </div>
-                    <h4 class="text-xs font-bold text-white">Data Transparan</h4>
-                    <p class="text-[10px] text-slate-300 mt-0.5 leading-snug">Histori pembayaran tercatat resmi</p>
+
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/5 text-center">
+                        <div class="w-6 h-6 mx-auto mb-1.5 rounded-lg bg-indigo-600/40 border border-indigo-400/30 text-indigo-200 font-mono font-bold text-xs flex items-center justify-center">2</div>
+                        <p class="text-xs font-bold text-white">Salin No. VA</p>
+                        <p class="text-[10px] text-slate-300 mt-0.5 leading-tight">Cek VA unik di dashboard</p>
+                    </div>
+
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/5 text-center">
+                        <div class="w-6 h-6 mx-auto mb-1.5 rounded-lg bg-indigo-600/40 border border-indigo-400/30 text-indigo-200 font-mono font-bold text-xs flex items-center justify-center">3</div>
+                        <p class="text-xs font-bold text-white">Transfer</p>
+                        <p class="text-[10px] text-slate-300 mt-0.5 leading-tight">Otomatis lunas detik itu juga</p>
+                    </div>
                 </div>
 
-                <div class="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                    <div class="text-amber-400 text-sm mb-1">
-                        <i class="fa-solid fa-bell"></i>
+                <!-- Footer Kartu -->
+                <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-300">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-check text-cyan-400 text-xs"></i>
+                        <span>Kanal Pembayaran: ATM, M-Banking & E-Wallet</span>
                     </div>
-                    <h4 class="text-xs font-bold text-white">Jatuh Tempo</h4>
-                    <p class="text-[10px] text-slate-300 mt-0.5 leading-snug">Otomatis deteksi tunggakan</p>
+                    <span class="text-[10px] text-indigo-300 font-medium">Tanpa Antre & Bebas Konfirmasi</span>
                 </div>
             </div>
-
         </div>
 
         <!-- Spacer Bawah -->
