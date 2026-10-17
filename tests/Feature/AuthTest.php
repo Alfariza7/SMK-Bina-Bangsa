@@ -77,7 +77,7 @@ class AuthTest extends TestCase
     public function test_siswa_can_login_and_redirect_to_dashboard(): void
     {
         $response = $this->post('/login', [
-            'username' => '12345',
+            'username' => '10101',
             'password' => 'siswa123',
         ]);
 

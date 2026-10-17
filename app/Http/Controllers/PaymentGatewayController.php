@@ -148,11 +148,11 @@ class PaymentGatewayController extends Controller
     }
 
     /**
-     * Reset Tagihan Demo untuk Siswa Indah Permatasari (NIS: 12345 - 10 RPL)
+     * Reset Tagihan Demo untuk Siswa Indah Permatasari (NIS: 10101 - 10 RPL)
      */
     public function resetDemo()
     {
-        $siswa = Siswa::where('nis', '12345')->first();
+        $siswa = Siswa::where('nis', '10101')->first();
         if (!$siswa) {
             return response()->json(['success' => false, 'message' => 'Siswa demo Indah Permatasari tidak ditemukan.'], 404);
         }
@@ -184,7 +184,7 @@ class PaymentGatewayController extends Controller
                 'bulan' => 'September 2026',
                 'nominal' => 350000,
                 'status' => 'BELUM BAYAR',
-                'virtual_account' => '8800012345',
+                'virtual_account' => '8800010101',
             ]
         ]);
     }

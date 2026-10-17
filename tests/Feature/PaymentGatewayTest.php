@@ -27,29 +27,30 @@ class PaymentGatewayTest extends TestCase
         parent::setUp();
 
         // Cari atau buat data pengujian
-        $this->siswa = Siswa::where('nis', '12345')->first();
+        $this->siswa = Siswa::where('nis', '10101')->first();
         if (!$this->siswa) {
             $user = User::create([
-                'username' => '12345',
+                'username' => '10101',
                 'password' => bcrypt('siswa123'),
-                'nama' => 'Ahmad Fauzan',
+                'nama' => 'Indah Permatasari',
                 'role' => 'siswa',
                 'status' => 'aktif',
             ]);
 
-            $ta = TahunAjaran::firstOrCreate(['tahun' => '2026/2027'], ['status' => 'aktif']);
+            $ta = TahunAjaran::firstOrCreate(['tahun_ajaran' => '2026/2027'], ['status' => 'aktif']);
             $jurusan = Jurusan::firstOrCreate(['kode_jurusan' => 'RPL'], ['nama_jurusan' => 'Rekayasa Perangkat Lunak']);
-            $kelas = Kelas::firstOrCreate(['nama_kelas' => 'XII RPL 1'], ['id_jurusan' => $jurusan->id_jurusan, 'tingkat' => 'XII']);
-            $tarif = TarifSpp::firstOrCreate(['id_tahun' => $ta->id_tahun, 'tingkat' => 'XII'], ['nominal' => 350000]);
+            $kelas = Kelas::firstOrCreate(['nama_kelas' => '10 RPL'], ['id_jurusan' => $jurusan->id_jurusan, 'tingkat' => '10', 'id_tahun_ajaran' => $ta->id_tahun_ajaran]);
+            $tarif = TarifSpp::firstOrCreate(['id_tahun_ajaran' => $ta->id_tahun_ajaran], ['nominal' => 350000]);
 
             $this->siswa = Siswa::create([
                 'id_user' => $user->id_user,
-                'nis' => '12345',
-                'nama' => 'Ahmad Fauzan',
+                'nis' => '10101',
+                'nisn' => '0091010101',
+                'nama' => 'Indah Permatasari',
                 'id_kelas' => $kelas->id_kelas,
-                'id_tarif' => $tarif->id_tarif,
+                'id_tahun_ajaran' => $ta->id_tahun_ajaran,
                 'alamat' => 'Sidoarjo',
-                'telepon' => '081234567890',
+                'no_hp' => '081234567890',
                 'status' => 'aktif',
             ]);
         }
@@ -57,8 +58,8 @@ class PaymentGatewayTest extends TestCase
         $this->va = VirtualAccount::firstOrCreate(
             ['id_siswa' => $this->siswa->id_siswa],
             [
-                'nomor_va' => '8800012345',
-                'bank' => 'BCA',
+                'prefix' => '88000',
+                'nomor_va' => '8800010101',
                 'status' => 'aktif',
             ]
         );
@@ -98,16 +99,16 @@ class PaymentGatewayTest extends TestCase
     public function test_inquiry_with_valid_va_returns_bill_data(): void
     {
         $response = $this->postJson(route('payment.inquiry'), [
-            'virtual_account' => '8800012345',
+            'virtual_account' => '8800010101',
         ]);
 
         $response->assertStatus(200);
         $response->assertJson([
             'success' => true,
             'data' => [
-                'virtual_account' => '8800012345',
+                'virtual_account' => '8800010101',
                 'siswa' => [
-                    'nis' => '12345',
+                    'nis' => '10101',
                     'nama' => $this->siswa->nama,
                 ],
             ],
@@ -140,7 +141,7 @@ class PaymentGatewayTest extends TestCase
         $uniqueTrxId = 'TRX-TEST-' . Str::random(10);
 
         $response = $this->postJson(route('payment.callback'), [
-            'virtual_account' => '8800012345',
+            'virtual_account' => '8800010101',
             'amount' => 350000,
             'transaction_id' => $uniqueTrxId,
             'status' => 'PAID',
@@ -189,7 +190,7 @@ class PaymentGatewayTest extends TestCase
         // Buat transaksi pertama
         TransaksiPaymentGateway::create([
             'transaction_id' => $duplicateTrxId,
-            'virtual_account' => '8800012345',
+            'virtual_account' => '8800010101',
             'id_siswa' => $this->siswa->id_siswa,
             'tanggal_transaksi' => now()->toDateString(),
             'waktu_transaksi' => now()->toTimeString(),
@@ -200,7 +201,7 @@ class PaymentGatewayTest extends TestCase
 
         // Callback kedua dengan ID yang sama
         $response = $this->postJson(route('payment.callback'), [
-            'virtual_account' => '8800012345',
+            'virtual_account' => '8800010101',
             'amount' => 350000,
             'transaction_id' => $duplicateTrxId,
             'status' => 'PAID',
@@ -220,7 +221,7 @@ class PaymentGatewayTest extends TestCase
         $this->tagihan->update(['status' => 'BELUM BAYAR']);
 
         $response = $this->postJson(route('payment.callback'), [
-            'virtual_account' => '8800012345',
+            'virtual_account' => '8800010101',
             'amount' => 100000, // Nominal salah (seharusnya 350000)
             'transaction_id' => 'TRX-WRONG-AMT-' . Str::random(8),
             'status' => 'PAID',
@@ -242,7 +243,7 @@ class PaymentGatewayTest extends TestCase
         $trxId = 'TRX-FAILED-' . Str::random(8);
 
         $response = $this->postJson(route('payment.callback'), [
-            'virtual_account' => '8800012345',
+            'virtual_account' => '8800010101',
             'amount' => 350000,
             'transaction_id' => $trxId,
             'status' => 'FAILED',
@@ -265,9 +266,9 @@ class PaymentGatewayTest extends TestCase
     }
 
     /**
-     * Test Fitur Reset Demo Siswa Ahmad Fauzan (September 2026 BELUM BAYAR)
+     * Test Fitur Reset Demo Siswa Indah Permatasari (September 2026 BELUM BAYAR)
      */
-    public function test_reset_demo_restores_ahmad_fauzan_bill_to_belum_bayar(): void
+    public function test_reset_demo_restores_indah_bill_to_belum_bayar(): void
     {
         $response = $this->postJson(route('payment.reset_demo'));
 
@@ -275,7 +276,7 @@ class PaymentGatewayTest extends TestCase
         $response->assertJson([
             'success' => true,
             'data' => [
-                'nis' => '12345',
+                'nis' => '10101',
                 'status' => 'BELUM BAYAR',
                 'nominal' => 350000,
             ]

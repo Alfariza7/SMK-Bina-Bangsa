@@ -126,7 +126,7 @@
                         <div class="relative">
                             <input type="text" 
                                    x-model="vaNumber" 
-                                   placeholder="Contoh: 8800012345" 
+                                   placeholder="Contoh: 8800010101" 
                                    class="w-full font-mono text-sm tracking-wider font-bold rounded-xl border border-slate-200 pl-3.5 pr-28 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                             <button type="button" 
                                     @click="runInquiry()" 
@@ -137,7 +137,7 @@
                             </button>
                         </div>
                         <p class="text-[10px] text-slate-400 mt-1">
-                            *Prefix Bank + 5 digit terakhir adalah NIS siswa (Contoh NIS 12345 &rarr; VA 8800012345)
+                            *Prefix Bank + 5 digit terakhir adalah NIS siswa (Contoh NIS 10101 &rarr; VA 8800010101)
                         </p>
                     </div>
 
@@ -551,7 +551,7 @@
 function paymentSimulator() {
     return {
         activeTab: 'banking',
-        vaNumber: '{{ $selectedVa ?? "8800012345" }}',
+        vaNumber: '{{ $selectedVa ?? "8800010101" }}',
         paymentChannel: 'BCA_VA',
         simulatedPaidAt: new Date().toISOString().slice(0, 16),
         inquiryResult: null,
@@ -710,7 +710,7 @@ function paymentSimulator() {
                 const data = await res.json();
                 if (data.success) {
                     alert('Berhasil: ' + data.message);
-                    this.vaNumber = '8800012345';
+                    this.vaNumber = '8800010101';
                     this.runInquiry();
                     this.refreshTransactions();
                 } else {
@@ -733,7 +733,7 @@ function paymentSimulator() {
             const randomCode = Math.random().toString(36).substring(2, 7).toUpperCase();
 
             let payloadObj = {
-                virtual_account: "8800012345",
+                virtual_account: "8800010101",
                 amount: 350000,
                 transaction_id: "TRX-" + today + "-" + randomCode,
                 status: "PAID",

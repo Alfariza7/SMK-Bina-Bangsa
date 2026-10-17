@@ -77,7 +77,7 @@ class LaporanAndKuitansiTest extends TestCase
             $trx = TransaksiPaymentGateway::firstOrCreate(
                 ['transaction_id' => 'TRX-KWT-TEST-001'],
                 [
-                    'virtual_account' => '8800012345',
+                    'virtual_account' => '88000' . $this->siswaModel->nis,
                     'id_siswa' => $this->siswaModel->id_siswa,
                     'tanggal_transaksi' => now()->toDateString(),
                     'waktu_transaksi' => '10:00:00',

@@ -103,11 +103,11 @@ class DatabaseSeeder extends Seeder
         // 10 RPL memuat: Indah, Joshua, Kimmy, Nadin, Nomi sesuai permintaan user
         $dataPerKelas = [
             '10_RPL' => [
-                ['nama' => 'Indah Permatasari', 'nis' => '12345', 'nisn' => '0091234501', 'jk' => 'P'],
-                ['nama' => 'Joshua Pratama',    'nis' => '12346', 'nisn' => '0091234502', 'jk' => 'L'],
-                ['nama' => 'Kimmy Kurniawan',   'nis' => '12347', 'nisn' => '0091234503', 'jk' => 'L'],
-                ['nama' => 'Nadin Safitri',     'nis' => '12348', 'nisn' => '0091234504', 'jk' => 'P'],
-                ['nama' => 'Nomi Aurelia',      'nis' => '12349', 'nisn' => '0091234505', 'jk' => 'P'],
+                ['nama' => 'Indah Permatasari', 'nis' => '10101', 'nisn' => '0091010101', 'jk' => 'P'],
+                ['nama' => 'Joshua Pratama',    'nis' => '10102', 'nisn' => '0091010102', 'jk' => 'L'],
+                ['nama' => 'Kimmy Kurniawan',   'nis' => '10103', 'nisn' => '0091010103', 'jk' => 'L'],
+                ['nama' => 'Nadin Safitri',     'nis' => '10104', 'nisn' => '0091010104', 'jk' => 'P'],
+                ['nama' => 'Nomi Aurelia',      'nis' => '10105', 'nisn' => '0091010105', 'jk' => 'P'],
             ],
             '10_DKV' => [
                 ['nama' => 'Aditya Nugraha',    'nis' => '10201', 'nisn' => '0091020101', 'jk' => 'L'],
@@ -211,13 +211,13 @@ class DatabaseSeeder extends Seeder
 
                 // Logika Tagihan SPP:
                 // Skenario:
-                // 1. Indah (NIS 12345): Target demo pengujian LSP
+                // 1. Indah (NIS 10101): Target demo pengujian LSP
                 //    - Juli 2026: LUNAS
                 //    - Agustus 2026: LUNAS
                 //    - September 2026: BELUM BAYAR (Rp 350.000, jatuh tempo 30 Sept 2026)
                 // 2. Siswa lainnya: kombinasi realistis LUNAS, BELUM BAYAR, dan TUNGGAKAN
 
-                if ($m['nis'] === '12345') {
+                if ($m['nis'] === '10101') {
                     // Indah (Akun Demo Utama)
                     $this->createTagihanLunas($siswa, $tarif, $ta, 'Juli', 2026, '2026-07-31', '2026-07-20 09:30:00', $vaNumber, $trxCounter++);
                     $this->createTagihanLunas($siswa, $tarif, $ta, 'Agustus', 2026, '2026-08-31', '2026-08-25 14:15:00', $vaNumber, $trxCounter++);
