@@ -157,7 +157,7 @@
                 <div class="p-3.5 bg-amber-50/70 border border-amber-200/80 rounded-xl mt-4">
                     <p class="text-[11px] text-amber-800 font-medium leading-relaxed">
                         <i class="fa-solid fa-circle-info mr-1"></i>
-                        <strong>Ketentuan Soal LSP:</strong> Tagihan SPP September 2026 jatuh tempo pada tanggal 30 September 2026. Tagihan yang belum lunas otomatis berstatus <strong>TUNGGAKAN</strong> saat tanggal memasuki 1 Oktober 2026.
+                        <strong>Pengingat:</strong> Setiap tagihan SPP akan jatuh tempo di akhir bulan. Tagihan yang belum lunas otomatis berstatus <strong>TUNGGAKAN</strong> saat awal bulan berikutnya.
                     </p>
                 </div>
             </div>

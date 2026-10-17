@@ -28,4 +28,9 @@ class TahunAjaran extends Model
     {
         return $this->hasMany(TarifSpp::class, 'id_tahun_ajaran', 'id_tahun_ajaran');
     }
+
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'id_tahun_ajaran', 'id_tahun_ajaran');
+    }
 }

@@ -22,4 +22,9 @@ class Jurusan extends Model
     {
         return $this->hasMany(Kelas::class, 'id_jurusan', 'id_jurusan');
     }
+
+    public function siswa()
+    {
+        return $this->hasManyThrough(Siswa::class, Kelas::class, 'id_jurusan', 'id_kelas', 'id_jurusan', 'id_kelas');
+    }
 }
